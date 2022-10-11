@@ -45,4 +45,12 @@ class HomeController extends Controller
     {
         return view('manageHome');
     }
+    public function pr_plan(Request $request)
+    {
+        return view('pr_plan');
+    }
+    public function reserve_table(Request $request)
+    {
+        return view('reserve_table');
+    }
 }

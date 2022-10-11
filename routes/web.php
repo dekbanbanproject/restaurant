@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('kitchen', [App\Http\Controllers\HomeController::class, 'kitchen'])->name('kitchen');
+Route::get('reserve_table', [App\Http\Controllers\HomeController::class, 'reserve_table'])->name('reserve_table');
+
 Auth::routes();
 Route::get('/', function () {
     if (Auth::check()) {
@@ -37,6 +40,6 @@ Route::get('manage/home', [App\Http\Controllers\HomeController::class, 'manageHo
 Route::middleware(['type'])->group(function(){ 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::get('pr_plan', [App\Http\Controllers\HomeController::class, 'pr_plan'])->name('pr_plan');
 
 });

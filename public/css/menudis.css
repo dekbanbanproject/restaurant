@@ -39,6 +39,15 @@
     justify-content: center;
     align-items: center;
 }
+.menu2 {
+    position: relative;
+    width:1000px;
+    height: 1000px;
+    /* background: #80D0C7; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .menu li {
     position: absolute;
@@ -52,18 +61,18 @@
 }
 
 .menu.active li {
-    transform: rotate(calc(360deg / 14 * var(--i)));
+    transform: rotate(calc(360deg / 6 * var(--i)));
 }
 
 .menu li a{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     background: #fff;
     border-radius: 50%;
-    transform: rotate(calc(360deg / -14 * var(--i)));
+    transform: rotate(calc(360deg / -6 * var(--i)));
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -74,8 +83,8 @@
 
 .toggle {
     position: absolute;
-    width: 230px;
-    height: 230px;
+    width: 200px;
+    height: 200px;
     background: #fff;
     display: flex;
     justify-content: center;
@@ -90,4 +99,163 @@
 
 .menu.active .toggle {
     transform: rotate(360deg);
+}
+body {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+        /* url(/restaurant/public/assets/images/restaurant_2.jpg)no-repeat 50%; */
+        url(/assets/images/restaurant_2.jpg)no-repeat 50%;
+        /* url(/sky16/images/bgPK.jpg)no-repeat 50%; */
+        /* url(/sky16/images/logo.png)no-repeat 50%; */
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    position: relative;
+}
+
+.form {
+    position: relative;
+    z-index: 100;
+    width: 500px;
+    height: 500px;
+    background-color: rgba(240, 248, 255, 0.158);
+    border-radius: 20px;
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.logo{
+    /* width: 200px; */
+    width: 100vh;
+    height: 100vh;
+    background: 
+    url(/pkclaim/public/sky16/images/logo250.png)no-repeat 50%;
+    /* url(/sky16/images/logo250.png)no-repeat 25%; */
+    background-size: cover;
+    /* background-attachment: fixed; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.h1 {
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 50px;
+    margin-top: 20px;
+}
+
+.username {
+    width: 250px;
+    background: none;
+    outline: none;
+    border: none;
+    margin: 15px 0px;
+    border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
+    padding: 10px;
+    color: aliceblue;
+    font-size: 18px;
+    transition: 0.2s ease-in-out;
+    margin-top: 50px;
+}
+.password {
+    width: 250px;
+    background: none;
+    outline: none;
+    border: none;
+    margin: 5px 0px;
+    border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
+    padding: 10px;
+    color: aliceblue;
+    font-size: 18px;
+    transition: 0.2s ease-in-out;
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.582);
+}
+::focus {
+    border-bottom: aliceblue 1px solid;
+}
+
+.fa-solid {
+    transition: 0.2s ease-in-out;
+    color: rgba(240, 248, 255, 0.59);
+    margin-right: 10px;
+    /* margin-top: 50px; */
+}
+
+.btn {
+    width: 120px;
+    height: 40px;
+    margin-top: 30px;
+    font-weight: 500;
+    color: aliceblue;
+    outline: none;
+    border: none;
+    background: rgba(240, 248, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    font-size: 20px;
+    transition: 0.2s;
+}
+
+::hover {
+    background: aliceblue;
+    color: gray;
+    font-weight: 500;
+}
+
+.circle1 {
+    position: absolute;
+    width: 290px;
+    height: 290px;
+    background: rgba(240, 248, 255, 0.1);
+    border-radius: 50%;
+    top: 60%;
+    left: -35%;
+    z-index: -1;
+    animation: float 2s 0.5s ease-in-out infinite;
+}
+.circle2 {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background: rgba(240, 248, 255, 0.1);
+    border-radius: 50%;
+    top: -15%;
+    right: -25%;
+    z-index: -1;
+    animation: float 2s ease-in-out infinite;
+}
+.circle3 {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: rgba(240, 248, 255, 0.1);
+    border-radius: 50%;
+    top: 50%;
+    right: -80%;
+    z-index: -1;
+    animation: float 2s 0.7s ease-in-out infinite;
+}
+@keyframes float{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-20px);
+    }
+    100%{
+        transform: translateY(0);
+    }
 }
