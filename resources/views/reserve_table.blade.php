@@ -22,6 +22,7 @@
     <link href="{{ asset('sky16/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/css/bootstrap-extended.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
 </head>
 <?php
 if (Auth::check()) {
@@ -51,9 +52,20 @@ $pos = strrpos($url, '/') + 1;
                 <i class="fa-solid fa-2x fa-gear text-danger" data-bs-toggle="tooltip" data-bs-placement="left"
                     data-bs-title="ตั้งค่า"></i>
             </a>  <br> --}}
-            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            {{-- <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 จองโต๊ะ
-            </button>
+            </button> --}}
+            <!-- Default dropend button -->
+            <div class="btn-group dropend">
+                <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                ZONE A
+                </button>
+                <ul class="dropdown-menu"> 
+                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#saveModal1">เพิ่มโต๊ะ</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </div>
             <br>
             <a class="navbar-brand" href="{{ url('admin/home') }}">
                 {{-- {{ config('app.name', 'Laravel') }} --}}
@@ -362,34 +374,172 @@ $pos = strrpos($url, '/') + 1;
     </footer>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="saveModal1" tabindex="-1" aria-labelledby="saveModal1Label"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="saveModal1Label">จัดการโต๊ะนั่ง</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="row"> 
+                        <div class="col-md-12 mb-3">
+                            <label for="table_group_1_name" class="form-label">ชื่อโต๊ะ</label>
+                            <input type="text" class="form-control" id="table_group_1_name" name="table_group_1_name">
+                        </div>
+                   
+                        {{-- <div class="col-md-12 mb-3">
+                            <label for="table_group_1_zone" class="form-label">Zone</label>
+                            <input type="text" class="form-control" id="table_group_1_zone" name="table_group_1_zone">
+                        </div> --}}
+                    
+                        <div class="col-md-12 mb-3">
+                            <select type="text" class="form-control" id="table_group_1_zone" name="table_group_1_zone">
+                                <option value="">--เลือก--</option>
+                                <option value="1">--1--</option>
+                                <option value="2">--2--</option>
+                                <option value="3">--3--</option>
+                                <option value="4">--4--</option>
+                                <option value="5">--5--</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer"> 
+                    <button type="button" id="save_table_group_1" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+                        บันทึกข้อมูล
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i
+                            class="fa-solid fa-xmark me-2"></i>Close</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script src="{{ asset('assets/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('sky16/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('sky16/js/app.js') }}"></script>
+    {{-- <script src="{{ asset('sky16/js/jquery.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('sky16/js/app.js') }}"></script> --}}
+    <script src="{{ asset('js/select2.min.js') }}"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let toggle = document.querySelector('.toggle');
         let menu = document.querySelector('.menu');
         toggle.onclick = function() {
             menu.classList.toggle('active');
         }
+        $(document).ready(function() {
+                $('#example').DataTable();
+                $('#example2').DataTable();
+                $('#example3').DataTable();
+
+                $('select').select2();
+                $('#table_group_1_zone').select2({
+                    dropdownParent: $('#saveModal1')
+                });
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $('#save_table_group_1').click(function() {
+
+                    var table_group_1_name = $('#table_group_1_name').val();
+                    var table_group_1_zone = $('#table_group_1_zone').val();
+                    // alert(table_group_1_name);
+                    $.ajax({
+                        url: "{{ route('zone.table_group_1_save') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            table_group_1_name,
+                            table_group_1_zone
+                        },
+                        success: function(data) {
+                            if (data.status == 200) {
+                                // alert('gggggg');
+                                Swal.fire({
+                                    title: 'บันทึกข้อมูลสำเร็จ',
+                                    text: "You Insert data success",
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#06D177',
+                                    confirmButtonText: 'เรียบร้อย'
+                                }).then((result) => {
+                                    if (result
+                                        .isConfirmed) {
+                                        console.log(
+                                            data);
+
+                                        window.location
+                                            .reload();
+                                    }
+                                })
+                            } else {
+
+                            }
+
+                        },
+                    });
+                });
+
+                $(document).on('click', '.edit_data', function() {
+                    var plan_type_id = $(this).val();
+                    // alert(plan_type_id);
+                    $('#updteModal').modal('show');
+                    // $.ajax({
+                    //     type: "GET",
+                    //     url: "{{ url('table_group_1_edit')}}" + '/' + table_group_1_id,
+                    //     success: function(data) {
+                    //         console.log(data.type.plan_type_name);
+                    //         $('#editplan_type_name').val(data.type.plan_type_name)
+                    //         $('#table_group_1_id').val(data.type.table_group_1_id)
+                    //     },
+                    // });
+                });
+                
+                $('#updateBtn').click(function() {
+                    var plan_type_id = $('#editplan_type_id').val();
+                    var plan_type_name = $('#editplan_type_name').val();
+                    $.ajax({
+                        url: "{{ route('zone.table_group_1_update') }}",
+                        type: "POST",
+                        dataType: 'json',
+                        data: {
+                            plan_type_id,
+                            plan_type_name
+                        },
+                        success: function(data) {
+                            if (data.status == 200) {
+                                Swal.fire({
+                                    title: 'แก้ไขข้อมูลสำเร็จ',
+                                    text: "You edit data success",
+                                    icon: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#06D177',
+                                    confirmButtonText: 'เรียบร้อย'
+                                }).then((result) => {
+                                    if (result
+                                        .isConfirmed) {
+                                        console.log(
+                                            data);
+
+                                        window.location
+                                            .reload();
+                                    }
+                                })
+                            } else {
+
+                            }
+
+                        },
+                    });
+                });
+                              
+            });
     </script>
 </body>
 
