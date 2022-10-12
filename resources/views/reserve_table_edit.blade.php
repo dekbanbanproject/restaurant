@@ -31,28 +31,28 @@
     function TypeAdmin() {
         window.location.href = '{{ route('index') }}';
     }
-    function updatetable(table_group_1_id) {
+    function delettable(table_group_1_id) {
         Swal.fire({
-            title: 'ต้องการจองโต๊ะนี้ใช่ไหม?',
-            text: "โต๊ะนี้จะถูกเปลี่ยนสีให้เลย !!",
+            title: 'ต้องการลบโต๊ะนี้ใช่ไหม?',
+            text: "โต๊ะนี้จะถูกลบไปเลย !!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#06D177',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'ใช่, จองเดี๋ยวนี้ !',
+            confirmButtonText: 'ใช่, ลบเดี๋ยวนี้ !',
             cancelButtonText: 'ไม่, ยกเลิก'
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ url('updatetable') }}" + '/' + table_group_1_id,
-                    type: 'POST',
+                    url: "{{ url('table_group_1_destroy') }}" + '/' + table_group_1_id,
+                    type: 'delete',
                     data: {
                         _token: $("input[name=_token]").val()
                     },
                     success: function(response) {
                         Swal.fire({
-                            title: 'จองโต๊ะนี้สำเร็จ!',
-                            text: "You Update data success",
+                            title: 'ลบโต๊ะนี้สำเร็จ!',
+                            text: "You Delete data success",
                             icon: 'success',
                             showCancelButton: false,
                             confirmButtonColor: '#06D177',
@@ -70,45 +70,7 @@
             }
         })
     }
-    function canceltable(table_group_1_id) {
-        Swal.fire({
-            title: 'ต้องการยกเลิกโต๊ะนี้ใช่ไหม?',
-            text: "โต๊ะนี้จะถูกเปลี่ยนสีให้เลย !!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'ใช่, ยกเลิกเดี๋ยวนี้ !',
-            cancelButtonText: 'ไม่, ยกเลิก'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ url('canceltable') }}" + '/' + table_group_1_id,
-                    type: 'POST',
-                    data: {
-                        _token: $("input[name=_token]").val()
-                    },
-                    success: function(response) {
-                        Swal.fire({
-                            title: 'ยกเลิกโต๊ะนี้สำเร็จ!',
-                            text: "You Updte data success",
-                            icon: 'success',
-                            showCancelButton: false,
-                            confirmButtonColor: '#06D177',
-                            // cancelButtonColor: '#d33',
-                            confirmButtonText: 'เรียบร้อย'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // $("#sid" + table_group_1_id).remove();
-                                window.location.reload();
-                                //   window.location = "/person/person_index"; //     
-                            }
-                        })
-                    }
-                })
-            }
-        })
-    }
+   
 </script>
 <?php
 if (Auth::check()) {
@@ -153,16 +115,13 @@ $pos = strrpos($url, '/') + 1;
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="{{url('reserve_table_edit')}}">แก้ไข/ลบ</a></li>
+                    <li><a class="dropdown-item" href="#">แก้ไข/ลบ</a></li>
                 </ul>
             </div>
             <br>
-            <a class="navbar-brand" href="{{ url('admin/home') }}">
-                {{-- {{ config('app.name', 'Laravel') }} --}}
-                {{-- <img src="{{ asset('apkclaim/images/logo150.png') }}" alt="logo-sm-light" height="40"> --}}
+            <a class="navbar-brand" href="{{ url('admin/home') }}"> 
                 <label for="" style="color: white;font-size:25px;"
-                    class="ms-2 mt-2 text-center">PR-Restaurant</label>
-                {{-- class="ms-2 mt-2">PKClaim</label> --}}
+                    class="ms-2 mt-2 text-center">PR-Restaurant</label> 
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -170,8 +129,7 @@ $pos = strrpos($url, '/') + 1;
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"> 
                 <ul class="navbar-nav me-auto">
 
                 </ul>
@@ -227,88 +185,35 @@ $pos = strrpos($url, '/') + 1;
 
 
     <div class="menu2">
-        {{-- <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table> --}}
+        
         <div class="container-fluid ">
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card-body">
                         <div class="row" >
                             <?php $i = 1; ?>
-                            @foreach ($table_group_1 as $item1)
-                                @if ($item1->table_group_1_active == 'TRUE')
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
-                                        <button type="button" class="btn btn-outline-danger"
-                                            href="javascript:void(0)"
-                                            onclick="canceltable({{ $item1->table_group_1_id }})"
-                                            value="{{ $item1->table_group_1_id }}" style="height: 90px;">
-                                            <div class="card-body shadow"
-                                                style="background-color: rgba(255, 6, 6, 0.301)">
-                                                <label for=""
-                                                    style="font-size:27px;color: rgb(255, 240, 241)">{{ $item1->table_group_1_name }}</label>
+                            @foreach ($table_group_1 as $item1) 
+                                
+                                    <div class="col-6 col-md-2 col-xl-2 me-2 ms-2" id="sid{{ $item1->table_group_1_id }}">
+                                        <button type="button" class="btn btn-outline-warning" style="height: 105px;">
+                                            <div class="card-body shadow" style="background-color: rgba(240, 248, 255, 0.253)">
+                                                <label for="" style="font-size:25px;color: rgb(240, 248, 255)">{{ $item1->table_group_1_name }} </label>  แก้ไข                                                
                                             </div>
                                         </button>
-                                    </div>
-                                @else
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item1->table_group_1_id }}">
-                                        <button type="button" class="btn btn-outline-info" href="javascript:void(0)"
-                                            onclick="updatetable({{ $item1->table_group_1_id }})"
-                                            value="{{ $item1->table_group_1_id }}" style="height: 90px;">
-                                            <div class="card-body shadow"
-                                                style="background-color: rgba(240, 248, 255, 0.253)">
-                                                <label for=""
-                                                    style="font-size:27px;color: rgb(240, 248, 255)">{{ $item1->table_group_1_name }}</label>
-                                            </div>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" href="javascript:void(0)" onclick="delettable({{ $item1->table_group_1_id }})" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                        ลบ {{ $item1->table_group_1_name }}
                                         </button>
+                                        <hr style="background-color: rgb(255, 255, 255)">
                                     </div>
-                                @endif
+                                   
+                                
                             @endforeach
 
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <div class="row mb-3 justify-content-center">
-                            <div class="col-6 col-md-4 col-xl-3 mt-3">
-                                <div class="card-body shadow">
-                                    <a href="{{ url('home') }}" class="nav-link text-dark">
-                                        <i class="fa-solid fa-2x fa-1 text-info"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

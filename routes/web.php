@@ -44,9 +44,13 @@ Route::get('pr_plan', [App\Http\Controllers\HomeController::class, 'pr_plan'])->
 
 Route::match(['get','post'],'table_group_1', [App\Http\Controllers\HomeController::class, 'table_group_1'])->name('zone.table_group_1');
 Route::match(['get','post'],'table_group_1_save', [App\Http\Controllers\HomeController::class, 'table_group_1_save'])->name('zone.table_group_1_save');
+Route::match(['get','post'],'reserve_table_edit', [App\Http\Controllers\HomeController::class, 'reserve_table_edit'])->name('zone.reserve_table_edit'); //ไปหน้าแก้ไขโต๊ะ
 Route::match(['get','post'],'table_group_1_edit/{id}', [App\Http\Controllers\HomeController::class, 'table_group_1_edit'])->name('zone.table_group_1_edit');
 Route::match(['get','post'],'table_group_1_update', [App\Http\Controllers\HomeController::class, 'table_group_1_update'])->name('zone.table_group_1_update');
 Route::delete('table_group_1_destroy/{id}',[App\Http\Controllers\HomeController::class, 'table_group_1_destroy'])->name('zone.table_group_1_destroy');//
+
+Route::match(['get','post'],'updatetable/{id}', [App\Http\Controllers\HomeController::class, 'updatetable'])->name('zone.updatetable');//จองโต๊ะ
+Route::match(['get','post'],'canceltable/{id}', [App\Http\Controllers\HomeController::class, 'canceltable'])->name('zone.canceltable');//ยกเลิก
 
 Route::match(['get','post'],'table_group_2', [App\Http\Controllers\HomeController::class, 'table_group_2'])->name('zone.table_group_2');
 Route::match(['get','post'],'table_group_3', [App\Http\Controllers\HomeController::class, 'table_group_3'])->name('zone.table_group_3');

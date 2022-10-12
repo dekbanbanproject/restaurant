@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Table_group_1;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\support\Facades\Hash;
@@ -51,6 +52,52 @@ class HomeController extends Controller
     }
     public function reserve_table(Request $request)
     {
-        return view('reserve_table');
+        $data['users'] = User::get();
+        $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
+        return view('reserve_table',$data);
+    }
+    public function table_group_1_save(Request $request)
+    {
+        $add = new Table_group_1();
+        $add->table_group_1_name = $request->input('table_group_1_name'); 
+        $add->table_group_1_zone = $request->input('table_group_1_zone');
+        $add->user_id = $request->input('user_id');          
+        $add->save();
+
+        return response()->json([
+            'status'     => '200',
+        ]);
+    }
+    public function updatetable(Request $request,$id)
+    {  
+        DB::table('Table_group_1')
+        ->where('table_group_1_id', $id)
+        ->update(['table_group_1_active' => 'TRUE']);
+
+        return response()->json([
+            'status'     => '200',
+        ]);
+    }
+    public function canceltable(Request $request,$id)
+    { 
+        DB::table('Table_group_1')
+        ->where('table_group_1_id', $id)
+        ->update(['table_group_1_active' => 'FALSE']);
+
+        return response()->json([
+            'status'     => '200',
+        ]);
+    }
+    public function reserve_table_edit(Request $request)
+    {
+        $data['users'] = User::get();
+        $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
+        return view('reserve_table_edit',$data);
+    }
+    public function table_group_1_destroy(Request $request, $id)
+    {
+        $del = Table_group_1::find($id);
+        $del->delete();
+        return response()->json(['status' => '200']);
     }
 }

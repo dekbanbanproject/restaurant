@@ -16,7 +16,7 @@ return new class extends Migration
         if (!Schema::hasTable('table_group_1'))
         {
             Schema::create('table_group_1', function (Blueprint $table) {
-                $table->bigInteger('table_group_1_id');
+                $table->bigIncrements('table_group_1_id');
                 $table->string('table_group_1_name')->nullable();
                 $table->string('table_group_1_zone')->nullable();
                 $table->string('user_id')->nullable();
