@@ -23,7 +23,8 @@ class TypeAdmin
         // }
         // return redirect('/')->with('error','คุณไม่มีสิทธิ์เข้าถึงข้อมูล');
         if(empty(Auth::user())){
-            return redirect(route('login'));
+            return redirect(url('/'));
+            // return redirect(route('login'));
         }
         return $next($request);
     }

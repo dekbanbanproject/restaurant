@@ -35,14 +35,116 @@ $pos = strrpos($url, '/') + 1;
  
 ?>
 <style>
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: 'Edu VIC WA NT Beginner', cursive;
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Edu VIC WA NT Beginner', cursive;
+  }
+
+  body {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+          url(/restaurant/public/assets/images/restaurant.jpg)no-repeat 50%;
+      /* url(/assets/images/restaurant.jpg)no-repeat 50%; */ 
+      background-size: cover;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .container {
+      position: relative;
+  }
+
+  form {
+        position: relative;
+        z-index: 100;
+        width: 500px;
+        height: 500px;
+        background-color: rgba(240, 248, 255, 0.158);
+        border-radius: 20px;
+        backdrop-filter: blur(2px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+  .h1 {
+      color: rgb(255, 255, 255);
+      font-weight: 500;
+      margin-bottom: 20px;
+      font-size: 50px;
+      margin-top: 20px;
+  }
+
+  .username {
+      width: 250px;
+      background: none;
+      outline: none;
+      border: none;
+      margin: 15px 0px;
+      border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
+      padding: 10px;
+      color: aliceblue;
+      font-size: 18px;
+      transition: 0.2s ease-in-out;
+      margin-top: 50px;
+  }
+
+  .password {
+      width: 250px;
+      background: none;
+      outline: none;
+      border: none;
+      margin: 5px 0px;
+      border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
+      padding: 10px;
+      color: aliceblue;
+      font-size: 18px;
+      transition: 0.2s ease-in-out;
+  }
+
+  ::placeholder {
+      color: rgba(255, 255, 255, 0.582);
+  }
+
+  ::focus {
+      border-bottom: aliceblue 1px solid;
+  }
+
+  .fa-solid {
+      transition: 0.2s ease-in-out;
+      color: rgba(240, 248, 255, 0.59);
+      margin-right: 10px;
+      /* margin-top: 50px; */
+  }
+  
+
+  &::hover {
+      background: aliceblue;
+      color: gray;
+      font-weight: 500;
+  }
+ 
+  
+
+  @keyframes float {
+      0% {
+          transform: translateY(0);
       }
 
-      
+      50% {
+          transform: translateY(-20px);
+      }
+
+      100% {
+          transform: translateY(0);
+      }
+  }
 </style>
 <body  >
   <nav class="navbar navbar-expand-md navbar-light me-5">
@@ -139,7 +241,7 @@ $pos = strrpos($url, '/') + 1;
       </a>
     </li>
     <li style="--i:4;">
-      <a href="" target="_blank"> 
+      <a href="{{url('customerinfo')}}" target="_blank"> 
         <i class="fa-solid fa-3x fa-address-book text-danger" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="ลูกค้า"></i>
       </a> 
     </li>
@@ -172,7 +274,7 @@ $pos = strrpos($url, '/') + 1;
  
   <script src="{{ asset('assets/dist/js/bootstrap.bundle.min.js') }}"></script>  
   <script src="{{ asset('sky16/js/jquery.min.js') }}"></script>
- <script src="{{ asset('sky16/js/app.js') }}"></script> 
+ {{-- <script src="{{ asset('sky16/js/app.js') }}"></script>  --}}
    <script>
     let toggle = document.querySelector('.toggle');
     let menu = document.querySelector('.menu');

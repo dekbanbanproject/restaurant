@@ -28,7 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data['users'] = User::get();
+        $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
+        return view('home',$data);
     }
     public function customerHome(Request $request)
     {
@@ -53,7 +55,8 @@ class HomeController extends Controller
     public function reserve_table(Request $request)
     {
         $data['users'] = User::get();
-        $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
+        $data['table_group_1'] = Table_group_1::where('table_group_1_zone','=','A')->orderBy('table_group_1_id','asc')->get();
+        $data['table_group_1B'] = Table_group_1::where('table_group_1_zone','=','B')->orderBy('table_group_1_id','asc')->get();
         return view('reserve_table',$data);
     }
     public function table_group_1_save(Request $request)
@@ -70,7 +73,7 @@ class HomeController extends Controller
     }
     public function updatetable(Request $request,$id)
     {  
-        DB::table('Table_group_1')
+        DB::table('table_group_1')
         ->where('table_group_1_id', $id)
         ->update(['table_group_1_active' => 'TRUE']);
 
@@ -80,7 +83,7 @@ class HomeController extends Controller
     }
     public function canceltable(Request $request,$id)
     { 
-        DB::table('Table_group_1')
+        DB::table('table_group_1')
         ->where('table_group_1_id', $id)
         ->update(['table_group_1_active' => 'FALSE']);
 
@@ -91,7 +94,7 @@ class HomeController extends Controller
     public function reserve_table_edit(Request $request)
     {
         $data['users'] = User::get();
-        $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
+        $data['table_group_1'] = Table_group_1::get();
         return view('reserve_table_edit',$data);
     }
     public function table_group_1_destroy(Request $request, $id)

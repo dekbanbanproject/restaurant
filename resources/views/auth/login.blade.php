@@ -36,9 +36,8 @@
         width: 100%;
         height: 100vh;
         background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-            url(/pkclaim/public/sky16/images/bgPK.jpg)no-repeat 50%;
-        /* url(/sky16/images/bgPK.jpg)no-repeat 50%; */
-        /* url(/sky16/images/logo.png)no-repeat 50%; */
+            url(/restaurant/public/assets/images/restaurant.jpg)no-repeat 50%;
+        /* url(/assets/images/restaurant.jpg)no-repeat 50%; */ 
         background-size: cover;
         background-attachment: fixed;
         display: flex;
@@ -68,8 +67,8 @@
         width: 200px;
         height: 200px;
         background:
-            url(/pkclaim/public/sky16/images/logo250.png)no-repeat 50%;
-        /* url(/sky16/images/logo250.png)no-repeat 25%; */
+            url(/restaurant/public/assets/images/restaurant_cup.png)no-repeat 50%;
+        /* url(/assets/images/restaurant_cup.png)no-repeat 25%; */
         background-size: cover;
         /* background-attachment: fixed; */
         display: flex;
@@ -252,12 +251,12 @@
         </div>
         <div class="row mt-3"> 
             <div class="col-md-12 text-center">              
-                 <label for="" class=" ms-5" style="color: white">2022 © โรงพยาบาลภูเขียวเฉลิมพระเกียรติ</label> 
+                 <label for="" class=" ms-5" style="color: white">2022 © PR-Restaurant</label> 
             </div> 
         </div>
         <div class="row text-center"> 
             <div class="col-md-12 "> 
-                <label for="" class=" ms-5" style="color: white"> By งานประกัน</label>
+                <label for="" class=" ms-5" style="color: white"> By Dekbnbnproject</label>
             </div>       
         </div>
     </div>

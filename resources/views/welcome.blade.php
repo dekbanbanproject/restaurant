@@ -1,714 +1,523 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    {{-- <meta http-equiv="refresh" content="10"> --}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
-
-    <!-- Font Awesome -->
-    <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
+ 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('apkclaim/images/logo150.ico') }}">
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="{{ asset('css/styledis.css') }}" /> --}}
-    <link rel="stylesheet" href="{{ asset('bt52/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('bt52/js/bootstrap.bundle.min.js') }}" />
     <link href="{{ asset('apkclaim//libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('apkclaim//libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('apkclaim//libs/spectrum-colorpicker2/spectrum.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('apkclaim//libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet">
-    <!-- Scripts -->
-    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+    <!-- Font Awesome -->
+    <link href="{{ asset('assets/fontawesome/css/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/menudis.css') }}" rel="stylesheet">
+    <link href="{{ asset('sky16/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('sky16/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('sky16/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
 
+    <link href="{{ asset('sky16/css/bootstrap.min.css') }}" rel="stylesheet" />
+  
 </head>
 
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Edu VIC WA NT Beginner', cursive;
+    }
+
+    body {
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+            url(/restaurant/public/assets/images/restaurant.jpg)no-repeat 50%;
+        /* url(/assets/images/restaurant.jpg)no-repeat 50%; */ 
+        background-size: cover;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        position: relative;
+    }
+
+    .form {
+        position: relative;
+        z-index: 100;
+        width: 500px;
+        height: 500px;
+        background-color: rgba(240, 248, 255, 0.158);
+        border-radius: 20px;
+        backdrop-filter: blur(2px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .logo {
+        width: 200px;
+        height: 200px;
+        background:
+            url(/restaurant/public/assets/images/restaurant_cup.png)no-repeat 50%;
+        /* url(/assets/images/restaurant_cup.png)no-repeat 25%; */
+        background-size: cover;
+        /* background-attachment: fixed; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .h1 {
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        margin-bottom: 20px;
+        font-size: 50px;
+        margin-top: 20px;
+    }
+
+    .username {
+        width: 250px;
+        background: none;
+        outline: none;
+        border: none;
+        margin: 15px 0px;
+        border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
+        padding: 10px;
+        color: aliceblue;
+        font-size: 18px;
+        transition: 0.2s ease-in-out;
+        margin-top: 50px;
+    }
+
+    .password {
+        width: 250px;
+        background: none;
+        outline: none;
+        border: none;
+        margin: 5px 0px;
+        border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
+        padding: 10px;
+        color: aliceblue;
+        font-size: 18px;
+        transition: 0.2s ease-in-out;
+    }
+
+    ::placeholder {
+        color: rgba(255, 255, 255, 0.582);
+    }
+
+    ::focus {
+        border-bottom: aliceblue 1px solid;
+    }
+
+    .fa-solid {
+        transition: 0.2s ease-in-out;
+        color: rgba(240, 248, 255, 0.59);
+        margin-right: 10px;
+        /* margin-top: 50px; */
+    }
+
+     
+
+    .footer {
+        width: 400px;
+        height: 40px;
+        margin-top: 100px;
+        font-weight: 500;
+        color: aliceblue;
+        outline: none;
+        border: none;
+        background: rgba(240, 248, 255, 0.2);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        font-size: 20px;
+        transition: 0.2s;
+    }
+
+    &::hover {
+        background: aliceblue;
+        color: gray;
+        font-weight: 500;
+    }
+
+    .circle1 {
+        position: absolute;
+        width: 290px;
+        height: 290px;
+        background: rgba(240, 248, 255, 0.1);
+        border-radius: 50%;
+        top: 60%;
+        left: 75%;
+        z-index: -1;
+        animation: float 2s 0.5s ease-in-out infinite;
+    }
+
+    .circle2 {
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        background: rgba(240, 248, 255, 0.1);
+        border-radius: 50%;
+        top: -15%;
+        right: 25%;
+        z-index: -1;
+        animation: float 2s ease-in-out infinite;
+    }
+
+    .circle3 {
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        background: rgba(240, 248, 255, 0.1);
+        border-radius: 50%;
+        top: 50%;
+        right: 80%;
+        z-index: -1;
+        animation: float 2s 0.7s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+</style>
+
 <body>
-    <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-md-5">
-                <div class="card-body">
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-2 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-3 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-4 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-5 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-6 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-7 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-8 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-9 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i> <i class="fa-solid fa-3x fa-0 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i> <i class="fa-solid fa-3x fa-1 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i> <i class="fa-solid fa-3x fa-2 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    {{-- <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-4 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-5 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-6 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                    </div> --}}
+  
+    {{-- <div class="menu2"> --}}
+      
+        <div class="container-fluid ">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-md-3 mt-5">
+                    <label for="" class="justify-content-center" style="color: white;font-size:40px">PR - Restaurant</label>
                 </div>
+                <div class="col"></div>
             </div>
-            {{-- <div class="col-md-2 mt-3">
-                <div class="card-body shadow p-5">
-                    <a href="{{ url('home') }}" class="nav-link text-dark text-center"> 
-                        <i class="fa-solid fa-3x fa-tv text-danger"></i>
-                       
-                    </a>                 
+            
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <div class="row" >
+                            <?php $i = 1; ?>
+                            @foreach ($table_group_1 as $item1)
+                                @if ($item1->table_group_1_active == 'TRUE')
+                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                        <button type="button" class="btn btn-outline-danger"
+                                            href="javascript:void(0)"
+                                            onclick="cus_canceltable({{ $item1->table_group_1_id }})"
+                                            value="{{ $item1->table_group_1_id }}" style="height: 90px;">
+                                            <div class="card-body shadow"
+                                                style="background-color: rgba(255, 6, 6, 0.301)">
+                                                <label for=""
+                                                    style="font-size:27px;color: rgb(255, 240, 241)">{{ $item1->table_group_1_name }}</label>
+                                            </div>
+                                        </button>
+                                    </div>
+                                @else
+                                    <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item1->table_group_1_id }}">
+                                        <button type="button" class="btn btn-outline-info" href="javascript:void(0)"
+                                            onclick="cus_updatetable({{ $item1->table_group_1_id }})"
+                                            value="{{ $item1->table_group_1_id }}" style="height: 90px;">
+                                            <div class="card-body shadow"
+                                                style="background-color: rgba(240, 248, 255, 0.253)">
+                                                <label for=""
+                                                    style="font-size:27px;color: rgb(240, 248, 255)">{{ $item1->table_group_1_name }}</label>
+                                            </div>
+                                        </button>
+                                    </div>
+                                @endif
+                            @endforeach
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-                <div class="card-body">
-
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-7 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-8 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-9 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i> <i class="fa-solid fa-3x fa-0 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i> <i class="fa-solid fa-3x fa-1 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i> <i class="fa-solid fa-3x fa-2 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div> --}}
-        </div>
-
-        {{-- <div class="row">
-            <div class="col-md-5">
-                <div class="card-body">
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow-lg">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">รายงาน</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow-lg">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-2 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">สมาชิก</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow-lg">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-3 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ขายสินค้า</label>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow-lg">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-4 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ซื้อวัสดุ</label>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow-lg">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-5 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">รับสินค้า</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow-lg">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-6 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">คลังสินค้า</label>
-                                </a>
-
-                            </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <div class="row" >
+                            <?php $i = 1; ?>
+                            @foreach ($table_group_1B as $item2)
+                                @if ($item2->table_group_1_active == 'TRUE')
+                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                        <button type="button" class="btn btn-outline-danger"
+                                            href="javascript:void(0)"
+                                            onclick="cus_canceltable({{ $item2->table_group_1_id }})"
+                                            value="{{ $item2->table_group_1_id }}" style="height: 90px;">
+                                            <div class="card-body shadow"
+                                                style="background-color: rgba(255, 6, 6, 0.301)">
+                                                <label for=""
+                                                    style="font-size:27px;color: rgb(255, 240, 241)">{{ $item2->table_group_1_name }}</label>
+                                            </div>
+                                        </button>
+                                    </div>
+                                @else
+                                    <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item2->table_group_1_id }}">
+                                        <button type="button" class="btn btn-outline-info" href="javascript:void(0)"
+                                            onclick="cus_updatetable({{ $item2->table_group_1_id }})"
+                                            value="{{ $item2->table_group_1_id }}" style="height: 90px;">
+                                            <div class="card-body shadow"
+                                                style="background-color: rgba(240, 248, 255, 0.253)">
+                                                <label for=""
+                                                    style="font-size:27px;color: rgb(240, 248, 255)">{{ $item2->table_group_1_name }}</label>
+                                            </div>
+                                        </button>
+                                    </div>
+                                @endif
+                            @endforeach
 
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-               
-            </div>
-            <div class="col-md-5">
-                <div class="card-body">
-
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i><i class="fa-solid fa-3x fa-3 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow ">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i><i class="fa-solid fa-3x fa-4 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow ">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i><i class="fa-solid fa-3x fa-5 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow ">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i><i class="fa-solid fa-3x fa-6 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow ">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i><i class="fa-solid fa-3x fa-7 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow ">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i><i class="fa-solid fa-3x fa-8 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div> --}}
-        
-        {{-- <div class="row">
-            <div class="col-md-4">                  
-            </div> 
-            <div class="col-md-1">                
-            </div> 
-            <div class="col-md-5">
-                <div class="card-body">
-
-                    <div class="row justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-1 text-info"></i><i class="fa-solid fa-3x fa-9 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-2 text-info"></i><i class="fa-solid fa-3x fa-0 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-2 text-info"></i><i class="fa-solid fa-3x fa-1 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
+       
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
                   
+                    <span class="mb-3 mb-md-0 text-muted">
+                        <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-3"></i></a> 2022 &copy; PR-Restaurant
+                    </span>                        
+                </div>
+            
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-instagram"></i></a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-twitter"></i></a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-facebook"></i></a></li>
+                </ul>
+        </footer>
+    </div>
 
+    {{-- <footer class="footer ms-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label for="" style="color: white">2022 © PR-Restaurant</label>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <label for="" style="color: white"> By Dekbanbanproject</label>
+                </div>
+
+            </div>
+        </div>
+    </footer> --}}
+
+    <!-- Modal saveModal1-->
+    <div class="modal fade" id="saveModal1" tabindex="-1" aria-labelledby="saveModal1Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="saveModal1Label">จัดการโต๊ะนั่ง</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="table_group_1_name" class="form-label">ชื่อโต๊ะ</label>
+                            <input type="text" class="form-control" id="table_group_1_name"
+                                name="table_group_1_name">
+                        </div>
+                        <input type="hidden" class="form-control" id="table_group_1_zone" name="table_group_1_zone"
+                            value="A">
+                        <div class="col-md-12 mb-3">
+                            <select id="user_id" name="user_id" class="form-control form-control-sm input-rounded"
+                                style="width: 100%">
+                                <option value="">--เลือกผู้ดูแล--</option>
+                                @foreach ($users as $u)
+                                    <option value="{{ $u->id }}"> {{ $u->fname }} {{ $u->lname }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="save_table_group_1" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i
+                            class="fa-solid fa-xmark me-2"></i>Close</button>
                 </div>
             </div>
-            <div class="col-md-2">   
-                <div class="card-body">
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-12 col-xl-12 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-v text-primary"></i><i class="fa-solid fa-3x fa-i text-warning"></i><i class="fa-solid fa-3x fa-p text-success"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div> 
-                    </div> 
-                </div>             
-            </div>
-        </div>  --}}
-
-        {{-- <div class="row">
-            <div class="col-md-4"> 
-                <div class="row mb-3 justify-content-center">
-                    <div class="col-12 col-md-12 col-xl-12 mt-3">
-                        <div class="card-body shadow">
-                            <a href="{{ url('home') }}" class="nav-link text-dark text-center"> 
-                                <i class="fa-solid fa-3x fa-cash-register text-warning"></i>
-                                <br>
-                                <label for="" class="mt-2">เค้าร์เตอร์แคชเชียร์</label>
-                            </a>
-                        </div>
-                    </div>                    
-                </div>       
-            </div> 
-            <div class="col-md-1">                
-            </div> 
-            <div class="col-md-5">
-                <div class="card-body">
-
-                    <div class="row mb-3 justify-content-center">
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-2 text-info"></i><i class="fa-solid fa-3x fa-2 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-2 text-info"></i><i class="fa-solid fa-3x fa-3 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4 col-xl-3 mt-3">
-                            <div class="card-body shadow">
-                                <a href="{{ url('home') }}" class="nav-link text-dark text-center">
-                                    <i class="fa-solid fa-3x fa-2 text-info"></i><i class="fa-solid fa-3x fa-4 text-info"></i>
-                                    <br>
-                                    <label for="" class="mt-2">ว่าง</label>
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>                   
-                </div>
-            </div>
-            <div class="col-md-2">   
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                        <div class="col-6 col-md-12 col-xl-12 mt-3">
-                            <div class="card-body shadow"> 
-                                <button type="button"class="btn btn-light text-dark text-center edit_data"  >
-                                    <i class="fa-solid fa-3x fa-v text-primary"></i><i class="fa-solid fa-3x fa-i text-warning"></i><i class="fa-solid fa-3x fa-p text-success"></i>
-                                    <br>
-                                    <label for="" style="font-size:13px;color: rgb(255, 185, 34)">ว่าง</label>
-                                </button>
-                            </div>
-                        </div> 
-                    </div> 
-                </div>             
-            </div>
-        </div> --}}
-
-        <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-              <div class="col-md-4 d-flex align-items-center">
-                {{-- <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                  <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-                </a> --}}
-                <span class="mb-3 mb-md-0 text-muted">
-                    <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-3"></i></a>  &copy; 2022 DFood, POS</span>
-                    
-              </div>
-          
-              <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-instagram"></i></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-twitter"></i></a></li>
-                <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-facebook"></i></a></li>
-              </ul>
-            </footer>
-          </div>
+        </div>
     </div>
- 
-
-<!-- Modal -->
-<div class="modal fade" id="vipModal" tabindex="-1" aria-labelledby="vipModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="vipModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <hr>
-  <h2 class="fs-5">Tooltips in a modal</h2>
-  <p><a href="#" data-bs-toggle="tooltip" title="Tooltip">This link</a> and <a href="#" data-bs-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
     
+
     <script src="{{ asset('apkclaim/libs/jquery/jquery.min.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('bt52/js/bootstrap.min.js') }}" />
     <script src="{{ asset('apkclaim/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('apkclaim/libs/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('apkclaim/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('apkclaim/libs/node-waves/waves.min.js') }}"></script>
-
     <script src="{{ asset('apkclaim/libs/select2/js/select2.min.js') }}"></script>
-    <script src="{{ asset('apkclaim/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('apkclaim/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
-    <script src="{{ asset('apkclaim/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
-    <script src="{{ asset('apkclaim/libs/admin-resources/bootstrap-filestyle/bootstrap-filestyle.min.js') }}"></script>
-    <script src="{{ asset('apkclaim/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
-        <script> 
-            $(document).ready(function() {
-                // $('#example').DataTable(); 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                $('select').select2();
-                $('#ECLAIM_STATUS').select2({
-                    dropdownParent: $('#detailclaim')
-                });
+    <script>
+        $(document).ready(function() {
+            // window.setTimeout( function() {
+            // window.location.reload();
+            // }, 10000);
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                // $('#saveBtn').click(function() {
-
-                //     var plan_type_name = $('#plan_type_name').val();
-                //     // alert(plan_type_name);
-                //     $.ajax({
-                //         url: "",
-                //         type: "POST",
-                //         dataType: 'json',
-                //         data: {
-                //             plan_type_name
-                //         },
-                //         success: function(data) {
-                //             if (data.status == 200) {
-                //                 // alert('gggggg');
-                //                 Swal.fire({
-                //                     title: 'บันทึกข้อมูลสำเร็จ',
-                //                     text: "You Insert data success",
-                //                     icon: 'success',
-                //                     showCancelButton: false,
-                //                     confirmButtonColor: '#06D177',
-                //                     confirmButtonText: 'เรียบร้อย'
-                //                 }).then((result) => {
-                //                     if (result
-                //                         .isConfirmed) {
-                //                         console.log(
-                //                             data);
-
-                //                         window.location
-                //                             .reload();
-                //                     }
-                //                 })
-                //             } else {
-
-                //             }
-
-                //         },
-                //     });
-                // });
-
-                $(document).on('click', '.edit_data', function() {
-                    var plan_type_id = $(this).val();
-                    // alert(plan_type_id);
-                    $('#vipModal').modal('show');
-                    $.ajax({
-                        type: "GET",
-                        // url: "" + '/' + plan_type_id,
-                        success: function(data) {
-                            console.log(data.type.plan_type_name);
-                            // $('#editplan_type_name').val(data.type.plan_type_name)
-                            // $('#editplan_type_id').val(data.type.plan_type_id)
-                        },
-                    });
-                });
-                
-                // $('#updateBtn').click(function() {
-                //     var plan_type_id = $('#editplan_type_id').val();
-                //     var plan_type_name = $('#editplan_type_name').val();
-                //     $.ajax({
-                //         url: "",
-                //         type: "POST",
-                //         dataType: 'json',
-                //         data: {
-                //             plan_type_id,
-                //             plan_type_name
-                //         },
-                //         success: function(data) {
-                //             if (data.status == 200) {
-                //                 Swal.fire({
-                //                     title: 'แก้ไขข้อมูลสำเร็จ',
-                //                     text: "You edit data success",
-                //                     icon: 'success',
-                //                     showCancelButton: false,
-                //                     confirmButtonColor: '#06D177',
-                //                     confirmButtonText: 'เรียบร้อย'
-                //                 }).then((result) => {
-                //                     if (result
-                //                         .isConfirmed) {
-                //                         console.log(
-                //                             data);
-
-                //                         window.location
-                //                             .reload();
-                //                     }
-                //                 })
-                //             } else {
-
-                //             }
-
-                //         },
-                //     });
-                // });
-                              
+            $('select').select2();
+            $('#user_id').select2({
+                dropdownParent: $('#saveModal1')
             });
-           
-        </script>    
-    
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#save_table_group_1').click(function() {
+
+                var table_group_1_name = $('#table_group_1_name').val();
+                var table_group_1_zone = $('#table_group_1_zone').val();
+                var user_id = $('#user_id').val();
+                // alert(table_group_1_name);
+                $.ajax({
+                    url: "{{ route('zone.table_group_1_save') }}",
+                    type: "POST",
+                    dataType: 'json',
+                    data: {
+                        table_group_1_name,
+                        table_group_1_zone,
+                        user_id
+                    },
+                    success: function(data) {
+                        if (data.status == 200) {
+                            // alert('gggggg');
+                            Swal.fire({
+                                title: 'บันทึกข้อมูลสำเร็จ',
+                                text: "You Insert data success",
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: '#06D177',
+                                confirmButtonText: 'เรียบร้อย'
+                            }).then((result) => {
+                                if (result
+                                    .isConfirmed) {
+                                    console.log(
+                                        data);
+
+                                    window.location
+                                        .reload();
+                                }
+                            })
+                        } else {
+
+                        }
+
+                    },
+                });
+            });
+
+              
+        });
+    </script>
+
+<script>
+    function cus_updatetable(table_group_1_id) {
+       Swal.fire({
+           title: 'ต้องการจองโต๊ะนี้ใช่ไหม?',
+           text: "ระบบจะทำการจองให้ทันที !!",
+           icon: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#06D177',
+           cancelButtonColor: '#d33',
+           confirmButtonText: 'ใช่, จองเดี๋ยวนี้ !',
+           cancelButtonText: 'ไม่, ยกเลิก'
+       }).then((result) => {
+           if (result.isConfirmed) {
+               $.ajax({
+                   url: "{{ url('cus_updatetable') }}" + '/' + table_group_1_id,
+                   type: 'POST',
+                   data: {
+                       _token: $("input[name=_token]").val()
+                   },
+                   success: function(response) {
+                       Swal.fire({
+                           title: 'จองโต๊ะนี้สำเร็จ!',
+                           text: "You Update data success",
+                           icon: 'success',
+                           showCancelButton: false,
+                           confirmButtonColor: '#06D177',
+                           // cancelButtonColor: '#d33',
+                           confirmButtonText: 'เรียบร้อย'
+                       }).then((result) => {
+                           if (result.isConfirmed) {
+                               // $("#sid" + table_group_1_id).remove();
+                               window.location.reload();
+                               //   window.location = "/person/person_index"; //     
+                           }
+                       })
+                   }
+               })
+           }
+       })
+   }
+   function cus_canceltable(table_group_1_id) {
+       Swal.fire({
+           title: 'ต้องการยกเลิกโต๊ะนี้ใช่ไหม?',
+           text: "โต๊ะนี้จะถูกเปลี่ยนสีให้เลย !!",
+           icon: 'warning',
+           showCancelButton: true,
+           confirmButtonColor: '#3085d6',
+           cancelButtonColor: '#d33',
+           confirmButtonText: 'ใช่, ยกเลิกเดี๋ยวนี้ !',
+           cancelButtonText: 'ไม่, ยกเลิก'
+       }).then((result) => {
+           if (result.isConfirmed) {
+               $.ajax({
+                   url: "{{ url('cus_canceltable') }}" + '/' + table_group_1_id,
+                   type: 'POST',
+                   data: {
+                       _token: $("input[name=_token]").val()
+                   },
+                   success: function(response) {
+                       Swal.fire({
+                           title: 'ยกเลิกโต๊ะนี้สำเร็จ!',
+                           text: "You Cancel data success",
+                           icon: 'success',
+                           showCancelButton: false,
+                           confirmButtonColor: '#06D177',
+                           // cancelButtonColor: '#d33',
+                           confirmButtonText: 'เรียบร้อย'
+                       }).then((result) => {
+                           if (result.isConfirmed) {
+                               // $("#sid" + table_group_1_id).remove();
+                               window.location.reload();
+                               //   window.location = "/person/person_index"; //     
+                           }
+                       })
+                   }
+               })
+           }
+       })
+   }
+</script>
 
 </body>
 
