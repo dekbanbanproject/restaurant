@@ -5,18 +5,29 @@
 }
 
   body { 
-    width: 100%;
+    display: flex;
+    justify-content: center;
+   align-items: center;  
+    min-height: 100vh; 
+    background-color: #FBDA61;   
+    background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+   
     height: 100vh;
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+    url(/restaurant/public/assets/images/restaurant.jpg)no-repeat 50%; */
+
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-        url(/restaurant/public/assets/images/restaurant_2.jpg)no-repeat 50%;
-        /* url(/assets/images/restaurant_2.jpg)no-repeat 50%; */
-        /* url(/sky16/images/bgPK.jpg)no-repeat 50%; */
-        /* url(/sky16/images/logo.png)no-repeat 50%; */
-    background-size: cover;
-    background-attachment: fixed;
+    url(/restaurant/public/assets/images/restaurant_2.jpg)no-repeat 50%;
+
+  width: 100%; 
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+        url(/restaurant/public/assets/images/restaurant.jpg)no-repeat 50%;
+  
+    background-size: cover; 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;  
 
 }
 
@@ -62,17 +73,7 @@ margin-top: 300px;
     justify-content: center;
     align-items: center;
 }
-.menu5 {
-    position: relative;
-    width:1000px;
-    height: 2000px;
-    margin-top:350px;
-/* margin-bottom: 300px; */
-    /* background: #80D0C7; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 .menu li {
     position: absolute;
     left: 0;
@@ -124,7 +125,20 @@ margin-top: 300px;
 .menu.active .toggle {
     transform: rotate(360deg);
 }
- 
+body {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+        url(/restaurant/public/assets/images/restaurant_2.jpg)no-repeat 50%;
+        /* url(/assets/images/restaurant_2.jpg)no-repeat 50%; */
+        /* url(/sky16/images/bgPK.jpg)no-repeat 50%; */
+        /* url(/sky16/images/logo.png)no-repeat 50%; */
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .container {
     position: relative;

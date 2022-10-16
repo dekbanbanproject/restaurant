@@ -24,6 +24,7 @@ return new class extends Migration
                 $table->binary('img')->nullable();
                 $table->string('img_name')->nullable();
                 $table->enum('menukitchen_active', ['TRUE', 'FALSE'])->default('TRUE');
+                $table->string('menukitchen_category')->nullable();
                 $table->timestamps();
             });
         }

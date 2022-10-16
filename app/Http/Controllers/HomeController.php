@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use App\Models\Menukitchen_category;
 
 class HomeController extends Controller
 {
@@ -122,7 +123,8 @@ class HomeController extends Controller
     public function kitchen(Request $request)
     {
         $data['users'] = User::get(); 
-        $data['menukitchen'] = Menukitchen::get();
+        $data['menukitchen'] = Menukitchen::leftjoin('menukitchen_category','menukitchen_category.menukitchen_category_id','=','menukitchen.menukitchen_category')->get();
+        $data['menukitchen_category'] = Menukitchen_category::get();
         return view('store_kitchen.kitchen',$data);
     }
     public function kitchen_save(Request $request)
@@ -132,6 +134,7 @@ class HomeController extends Controller
         $add->menukitchen_name = $request->menukitchen_name;
         $add->menukitchen_pricecost = $request->menukitchen_pricecost;
         $add->menukitchen_pricesale = $request->menukitchen_pricesale; 
+        $add->menukitchen_category = $request->menukitchen_category; 
 
         if ($request->hasfile('img')) {
             $file = $request->file('img');
@@ -164,6 +167,7 @@ class HomeController extends Controller
         $update->menukitchen_name = $request->menukitchen_name;
         $update->menukitchen_pricecost = $request->menukitchen_pricecost;
         $update->menukitchen_pricesale = $request->menukitchen_pricesale; 
+        $update->menukitchen_category = $request->menukitchen_category; 
 
         if ($request->hasfile('img')) {
             $description = 'storage/menu/'.$update->img;

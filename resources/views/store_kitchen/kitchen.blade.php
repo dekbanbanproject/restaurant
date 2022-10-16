@@ -215,7 +215,7 @@ $pos = strrpos($url, '/') + 1;
             </div>
         </div>
     </nav>
-    <div class="menu3">
+    <div class="menu4">
         <div class="container-fluid ">
             <h3 align="center" style="color: white">เมนูอาหาร</h3>
             <br />
@@ -323,6 +323,20 @@ $pos = strrpos($url, '/') + 1;
                                                                     <input type="text" class="form-control" id="editmenukitchen_pricesale"
                                                                         name="menukitchen_pricesale" value="{{$item->menukitchen_pricesale}}">
                                                                 </div>
+                                                                <div class="col-md-12 mt-2">
+                                                                    <label for="menukitchen_category" class="form-label">ประเภทอาหาร</label> 
+                                                                    <select id="menukitchen_category" name="menukitchen_category" class="form-control form-control-sm input-rounded" style="width: 100%">
+                                                                        <option value="">--ประเภทอาหาร--</option> 
+                                                                       @foreach ($menukitchen_category as $itemcat)
+                                                                       @if ($item->menukitchen_category == $itemcat->menukitchen_category_id)
+                                                                       <option value="{{$itemcat->menukitchen_category_id}}" selected>{{$itemcat->menukitchen_category_name}}</option> 
+                                                                       @else
+                                                                       <option value="{{$itemcat->menukitchen_category_id}}">{{$itemcat->menukitchen_category_name}}</option> 
+                                                                       @endif
+                                                                      
+                                                                       @endforeach
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -395,6 +409,15 @@ $pos = strrpos($url, '/') + 1;
                                         <label for="menukitchen_pricesale" class="form-label">ราคาขาย</label>
                                         <input type="text" class="form-control" id="menukitchen_pricesale"
                                             name="menukitchen_pricesale">
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="menukitchen_category" class="form-label">ประเภทอาหาร</label> 
+                                        <select id="menukitchen_category" name="menukitchen_category" class="form-control form-control-sm input-rounded" style="width: 100%">
+                                            <option value="">--ประเภทอาหาร--</option> 
+                                           @foreach ($menukitchen_category as $itemcat)
+                                           <option value="{{$itemcat->menukitchen_category_id}}">{{$itemcat->menukitchen_category_name}}</option> 
+                                           @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
