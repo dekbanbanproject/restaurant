@@ -580,6 +580,9 @@ $pos = strrpos($url, '/') + 1;
                 });
             });
 
+          
+
+
             // $(document).on('click', '.edit_data', function() {
             //     var table_group_1_id = $(this).val(); 
             //     $('#updteModal').modal('show');

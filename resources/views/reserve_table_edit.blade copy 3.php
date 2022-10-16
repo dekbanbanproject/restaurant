@@ -46,18 +46,7 @@
     }
 
 </script>
-<?php
-if (Auth::check()) {
-    $type = Auth::user()->type;
-    $iduser = Auth::user()->id;
-} else {
-    echo "<body onload=\"TypeAdmin()\"></body>";
-    exit();
-}
-$url = Request::url();
-$pos = strrpos($url, '/') + 1;
 
-?>
   
         <div class="container-fluid ">
             <h3 align="center" style="color: white">ชื่อโต๊ะ</h3>
@@ -277,60 +266,33 @@ $pos = strrpos($url, '/') + 1;
         </div>
     </div> --}}
 
-    {{-- @endsection --}}
-    {{-- @section('footer') --}}
- 
-    {{-- <script src="{{ asset('apkclaim/libs/select2/js/select2.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    --}}
-
-    <script>
-    //     $(document).ready(function() { 
-    //        $('#table_update').on('submit', function(e) {
-    //                e.preventDefault();
-    
-    //                var form = this;
-    //                // alert('OJJJJOL');
-    //                $.ajax({
-    //                    url: $(form).attr('action'),
-    //                    method: $(form).attr('method'),
-    //                    data: new FormData(form),
-    //                    processData: false,
-    //                    dataType: 'json',
-    //                    contentType: false,
-    //                    beforeSend: function() {
-    //                        $(form).find('span.error-text').text('');
-    //                    },
-    //                    success: function(data) {
-    //                        if (data.status == 0) {
-    
-    //                        } else {
-    //                            Swal.fire({
-    //                                title: 'แก้ไขข้อมูลสำเร็จ',
-    //                                text: "You edit data success",
-    //                                icon: 'success',
-    //                                showCancelButton: false,
-    //                                confirmButtonColor: '#06D177',
-    //                                // cancelButtonColor: '#d33',
-    //                                confirmButtonText: 'เรียบร้อย'
-    //                            }).then((result) => {
-    //                                if (result.isConfirmed) {
-    //                                    window.location
-    //                                  .reload();
-    //                                    // window.location =
-    //                                    //     "{{ url('supplies/supplies_index') }}"; // กรณี add page new   
-    //                                }
-    //                            })
-    //                        }
-    //                    }
-    //                });
-    //            });
-    //    });
-    </script>
+    @endsection
+    @section('footer')
+    <script src="{{ asset('apkclaim/libs/select2/js/select2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+     <!-- Required datatable js -->
+     <script src="{{ asset('apkclaim/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+   
+     <!-- Buttons examples -->
+     <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/jszip/jszip.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+   
+     <script src="{{ asset('apkclaim/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+   
+     <!-- Responsive examples -->
+     <script src="{{ asset('apkclaim/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+     <script src="{{ asset('apkclaim/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+   
     <script>
         $(document).ready(function() { 
-
-
             $('#example').DataTable();
             $('#example2').DataTable();
              

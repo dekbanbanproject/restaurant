@@ -71,6 +71,20 @@ class HomeController extends Controller
             'status'     => '200',
         ]);
     }
+    public function table_group_1_update(Request $request)
+    {
+        $id = $request->table_group_1_id;
+        $add = Table_group_1::find($id);
+        $add->table_group_1_name = $request->input('table_group_1_name'); 
+        $add->table_group_1_zone = $request->input('table_group_1_zone');
+        $add->user_id = $request->input('user_id');          
+        $add->save();
+
+        return redirect()->route('zone.reserve_table_edit');
+        // return response()->json([
+        //     'status'     => '200',
+        // ]);
+    }
     public function updatetable(Request $request,$id)
     {  
         DB::table('table_group_1')
@@ -102,5 +116,12 @@ class HomeController extends Controller
         $del = Table_group_1::find($id);
         $del->delete();
         return response()->json(['status' => '200']);
+    }
+    public function kitchen(Request $request)
+    {
+        $data['users'] = User::get();
+        $data['table_group_1'] = Table_group_1::where('table_group_1_zone','=','A')->orderBy('table_group_1_id','asc')->get();
+        $data['table_group_1B'] = Table_group_1::where('table_group_1_zone','=','B')->orderBy('table_group_1_id','asc')->get();
+        return view('store_kitchen.kitchen',$data);
     }
 }
