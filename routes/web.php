@@ -59,8 +59,13 @@ Route::get('manage/home', [App\Http\Controllers\HomeController::class, 'manageHo
 
 Route::middleware(['type'])->group(function () {
 
-    Route::get('kitchen', [App\Http\Controllers\HomeController::class, 'kitchen'])->name('kitchen');
+    Route::get('kitchen', [App\Http\Controllers\HomeController::class, 'kitchen'])->name('menu.kitchen');
+    Route::match(['get', 'post'], 'kitchen_save', [App\Http\Controllers\HomeController::class, 'kitchen_save'])->name('menu.kitchen_save');
+    Route::get('kitchen_edit/{id}', [App\Http\Controllers\HomeController::class, 'kitchen_edit'])->name('menu.kitchen_edit');
+    Route::match(['get', 'post'], 'kitchen_update', [App\Http\Controllers\HomeController::class, 'kitchen_update'])->name('menu.kitchen_update');
+    Route::delete('kitchen_destroy/{id}', [App\Http\Controllers\HomeController::class, 'kitchen_destroy'])->name('menu.kitchen_destroy'); //
 
+    
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('pr_plan', [App\Http\Controllers\HomeController::class, 'pr_plan'])->name('pr_plan');
 

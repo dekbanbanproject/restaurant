@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Table_group_1;
+use App\Models\Menukitchen;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 class HomeController extends Controller
 {
@@ -119,9 +121,75 @@ class HomeController extends Controller
     }
     public function kitchen(Request $request)
     {
-        $data['users'] = User::get();
-        $data['table_group_1'] = Table_group_1::where('table_group_1_zone','=','A')->orderBy('table_group_1_id','asc')->get();
-        $data['table_group_1B'] = Table_group_1::where('table_group_1_zone','=','B')->orderBy('table_group_1_id','asc')->get();
+        $data['users'] = User::get(); 
+        $data['menukitchen'] = Menukitchen::get();
         return view('store_kitchen.kitchen',$data);
+    }
+    public function kitchen_save(Request $request)
+    {
+        $add = new Menukitchen();
+        $add->menukitchen_code = $request->menukitchen_code; 
+        $add->menukitchen_name = $request->menukitchen_name;
+        $add->menukitchen_pricecost = $request->menukitchen_pricecost;
+        $add->menukitchen_pricesale = $request->menukitchen_pricesale; 
+
+        if ($request->hasfile('img')) {
+            $file = $request->file('img');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention; 
+            $request->img->storeAs('menu',$filename,'public'); 
+            $add->img = $filename;
+            $add->img_name = $filename;
+        }     
+        $add->save();
+
+        return response()->json([
+            'status'     => '200',
+        ]);
+    }
+    public function kitchen_edit(Request $request, $id)
+    {
+        $datakitchen = Menukitchen::find($id);
+
+        return response()->json([
+            'status'     => '200',
+            'datakitchen'      =>  $datakitchen,
+        ]);
+    }
+    public function kitchen_update(Request $request)
+    {
+        $id = $request->input('menukitchen_id');
+        $update = Menukitchen::find($id);
+        $update->menukitchen_code = $request->menukitchen_code; 
+        $update->menukitchen_name = $request->menukitchen_name;
+        $update->menukitchen_pricecost = $request->menukitchen_pricecost;
+        $update->menukitchen_pricesale = $request->menukitchen_pricesale; 
+
+        if ($request->hasfile('img')) {
+            $description = 'storage/menu/'.$update->img;
+            if (File::exists($description))
+            {
+                File::delete($description);
+            }
+            $file = $request->file('img');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention; 
+            $request->img->storeAs('menu',$filename,'public'); 
+            $update->img = $filename;
+            $update->img_name = $filename;
+        }
+
+        
+        $update->save();
+        return redirect()->route('menu.kitchen');
+        // return response()->json([
+        //     'status'     => '200',
+        // ]);
+    }
+    public function kitchen_destroy(Request $request, $id)
+    {
+        $del = Menukitchen::find($id);
+        $del->delete();
+        return response()->json(['status' => '200']);
     }
 }
