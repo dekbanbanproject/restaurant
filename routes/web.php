@@ -104,6 +104,10 @@ Route::middleware(['type'])->group(function () {
     // Route::put('person/person_typeupdate',[App\Http\Controllers\PersonController::class, 'person_typeupdate'])->name('person.person_typeupdate');//
     // Route::match(['get','post'],'person/person_update',[App\Http\Controllers\PersonController::class, 'person_update'])->name('person.person_update');//
     // Route::delete('person/person_destroy/{id}',[App\Http\Controllers\PersonController::class, 'person_destroy'])->name('person.person_destroy');//
-
+    Route::get('order', [App\Http\Controllers\OrderController::class, 'order'])->name('or.order'); 
+    Route::match(['get', 'post'], 'order_save', [App\Http\Controllers\OrderController::class, 'order_save'])->name('or.order_save');
+    Route::get('order_edit/{id}', [App\Http\Controllers\OrderController::class, 'order_edit'])->name('or.order_edit');
+    Route::match(['get', 'post'], 'order_update', [App\Http\Controllers\OrderController::class, 'order_update'])->name('or.order_update');
+    Route::delete('order_destroy/{id}', [App\Http\Controllers\OrderController::class, 'order_destroy'])->name('or.order_destroy'); //
 
 });

@@ -17,6 +17,8 @@
     <link href="{{ asset('sky16/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
       <!-- Bootstrap CSS -->
+      {{-- <link rel="stylesheet" href="{{ asset('bt52/css/bootstrap.min.css') }}" /> --}}
+      {{-- <link rel="stylesheet" href="{{ asset('bt52/js/bootstrap.bundle.min.js') }}" /> --}}
      
       <link href="{{ asset('sky16/css/bootstrap.min.css') }}" rel="stylesheet" />
       <link href="{{ asset('sky16/css/bootstrap-extended.css') }}" rel="stylesheet" />
@@ -231,7 +233,7 @@ $pos = strrpos($url, '/') + 1;
     </li>
     
     <li style="--i:2;">
-      <a href="{{url("car/car_narmal_calenda")}}" target="_blank">
+      <a href="{{url("order")}}" target="_blank">
         <i class="fa-solid fa-3x fa-file-invoice text-info" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="สั่งซื้อ"></i>
       </a> 
     </li> 
