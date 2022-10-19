@@ -72,6 +72,7 @@ $pos = strrpos($url, '/') + 1;
                             <thead >
                                 <tr>
                                     <th style="color: white">ลำดับ</th>
+                                    <th style="color: white">QRCODE</th> 
                                     <th style="color: white">ชื่อโต๊ะ</th> 
                                     <th style="color: white" width="30%">จัดการ</th> 
                                 </tr>
@@ -81,6 +82,10 @@ $pos = strrpos($url, '/') + 1;
                                 @foreach ($table_group_1 as $item)
                                     <tr >
                                         <td style="color: white">{{ $i++ }}</td>
+                                        <td style="color: white">
+                                            {{-- {!! QrCode::size(50)->generate($item->table_group_1_name); !!}  --}}
+                                            {!! QrCode::size(100)->generate(asset('order_add/'.$item->table_group_1_name)); !!} 
+                                        </td> 
                                         <td style="color: white">{{ $item->table_group_1_name }}</td> 
                                         <td style="color: white" width="30%">                                             
                                             {{-- <button type="button" class="btn btn-outline-warning edit_data" data-bs-toggle="modal" data-bs-target="#updteModal{{$item->table_group_1_id}}">  --}}

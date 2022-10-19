@@ -18,7 +18,7 @@
     <link href="{{ asset('apkclaim//libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{ asset('assets/fontawesome/css/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/menudis.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/menufooddis.css') }}" rel="stylesheet">
     <link href="{{ asset('sky16/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
@@ -27,183 +27,7 @@
     <link href="{{ asset('sky16/css/bootstrap.min.css') }}" rel="stylesheet" />
   
 </head>
-
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Edu VIC WA NT Beginner', cursive;
-    }
-
-    body {
-        width: 100%;
-        height: 100vh;
-        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-            url(/restaurant/public/assets/images/restaurant.jpg)no-repeat 50%;
-        /* url(/assets/images/restaurant.jpg)no-repeat 50%; */ 
-        background-size: cover;
-        background-attachment: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .container {
-        position: relative;
-    }
-
-    .form {
-        position: relative;
-        z-index: 100;
-        width: 500px;
-        height: 500px;
-        background-color: rgba(240, 248, 255, 0.158);
-        border-radius: 20px;
-        backdrop-filter: blur(2px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    .logo {
-        width: 200px;
-        height: 200px;
-        background:
-            url(/restaurant/public/assets/images/restaurant_cup.png)no-repeat 50%;
-        /* url(/assets/images/restaurant_cup.png)no-repeat 25%; */
-        background-size: cover;
-        /* background-attachment: fixed; */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .h1 {
-        color: rgb(255, 255, 255);
-        font-weight: 500;
-        margin-bottom: 20px;
-        font-size: 50px;
-        margin-top: 20px;
-    }
-
-    .username {
-        width: 250px;
-        background: none;
-        outline: none;
-        border: none;
-        margin: 15px 0px;
-        border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
-        padding: 10px;
-        color: aliceblue;
-        font-size: 18px;
-        transition: 0.2s ease-in-out;
-        margin-top: 50px;
-    }
-
-    .password {
-        width: 250px;
-        background: none;
-        outline: none;
-        border: none;
-        margin: 5px 0px;
-        border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
-        padding: 10px;
-        color: aliceblue;
-        font-size: 18px;
-        transition: 0.2s ease-in-out;
-    }
-
-    ::placeholder {
-        color: rgba(255, 255, 255, 0.582);
-    }
-
-    ::focus {
-        border-bottom: aliceblue 1px solid;
-    }
-
-    .fa-solid {
-        transition: 0.2s ease-in-out;
-        color: rgba(240, 248, 255, 0.59);
-        margin-right: 10px;
-        /* margin-top: 50px; */
-    }
-
-     
-
-    .footer {
-        width: 400px;
-        height: 40px;
-        margin-top: 100px;
-        font-weight: 500;
-        color: aliceblue;
-        outline: none;
-        border: none;
-        background: rgba(240, 248, 255, 0.2);
-        backdrop-filter: blur(15px);
-        border-radius: 20px;
-        font-size: 20px;
-        transition: 0.2s;
-    }
-
-    &::hover {
-        background: aliceblue;
-        color: gray;
-        font-weight: 500;
-    }
-
-    .circle1 {
-        position: absolute;
-        width: 290px;
-        height: 290px;
-        background: rgba(240, 248, 255, 0.1);
-        border-radius: 50%;
-        top: 60%;
-        left: 75%;
-        z-index: -1;
-        animation: float 2s 0.5s ease-in-out infinite;
-    }
-
-    .circle2 {
-        position: absolute;
-        width: 170px;
-        height: 170px;
-        background: rgba(240, 248, 255, 0.1);
-        border-radius: 50%;
-        top: -15%;
-        right: 25%;
-        z-index: -1;
-        animation: float 2s ease-in-out infinite;
-    }
-
-    .circle3 {
-        position: absolute;
-        width: 220px;
-        height: 220px;
-        background: rgba(240, 248, 255, 0.1);
-        border-radius: 50%;
-        top: 50%;
-        right: 80%;
-        z-index: -1;
-        animation: float 2s 0.7s ease-in-out infinite;
-    }
-
-    @keyframes float {
-        0% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-20px);
-        }
-
-        100% {
-            transform: translateY(0);
-        }
-    }
-</style>
-
+ 
 <body>
   
     {{-- <div class="menu2"> --}}
@@ -226,28 +50,25 @@
                             @foreach ($table_group_1 as $item1)
                                 @if ($item1->table_group_1_active == 'TRUE')
                                     <div class="col-6 col-md-2 col-xl-2 me-2" >
-                                        <button type="button" class="btn btn-outline-danger"
-                                            href="javascript:void(0)"
-                                            onclick="cus_canceltable({{ $item1->table_group_1_id }})"
-                                            value="{{ $item1->table_group_1_id }}" style="height: 90px;">
+                                        <a class="btn btn-outline-danger" href="{{url('order_add/'.$item1->table_group_1_name)}}" style="height: auto;width:auto">
                                             <div class="card-body shadow"
                                                 style="background-color: rgba(255, 6, 6, 0.301)">
+                                                {!! QrCode::size(80)->generate(asset('order_add/'.$item1->table_group_1_name)); !!}<br> 
                                                 <label for=""
                                                     style="font-size:27px;color: rgb(255, 240, 241)">{{ $item1->table_group_1_name }}</label>
                                             </div>
-                                        </button>
+                                        </a>
                                     </div>
                                 @else
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item1->table_group_1_id }}">
-                                        <button type="button" class="btn btn-outline-info" href="javascript:void(0)"
-                                            onclick="cus_updatetable({{ $item1->table_group_1_id }})"
-                                            value="{{ $item1->table_group_1_id }}" style="height: 90px;">
+                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                        <a class="btn btn-outline-info" href="{{url('order_add/'.$item1->table_group_1_name)}} " style="height: auto;width:auto">
                                             <div class="card-body shadow"
                                                 style="background-color: rgba(240, 248, 255, 0.253)">
+                                                {!! QrCode::size(80)->generate(asset('order_add/'.$item1->table_group_1_name)); !!}<br> 
                                                 <label for=""
                                                     style="font-size:27px;color: rgb(240, 248, 255)">{{ $item1->table_group_1_name }}</label>
                                             </div>
-                                        </button>
+                                        </a>
                                     </div>
                                 @endif
                             @endforeach
@@ -262,28 +83,26 @@
                             @foreach ($table_group_1B as $item2)
                                 @if ($item2->table_group_1_active == 'TRUE')
                                     <div class="col-6 col-md-2 col-xl-2 me-2" >
-                                        <button type="button" class="btn btn-outline-danger"
-                                            href="javascript:void(0)"
-                                            onclick="cus_canceltable({{ $item2->table_group_1_id }})"
-                                            value="{{ $item2->table_group_1_id }}" style="height: 90px;">
+                                        <a class="btn btn-outline-danger" href="{{url('order_add/'.$item2->table_group_1_name)}} " style="height: auto;width:auto">
                                             <div class="card-body shadow"
-                                                style="background-color: rgba(255, 6, 6, 0.301)">
+                                                style="background-color: rgba(255, 6, 6, 0.301)" >
+                                                {!! QrCode::size(80)->generate(asset('order_add/'.$item2->table_group_1_name)); !!}<br> 
                                                 <label for=""
-                                                    style="font-size:27px;color: rgb(255, 240, 241)">{{ $item2->table_group_1_name }}</label>
+                                                    style="font-size:17px;color: rgb(255, 240, 241)">{{ $item2->table_group_1_name }}</label>
                                             </div>
-                                        </button>
+                                        </a>
                                     </div>
                                 @else
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item2->table_group_1_id }}">
-                                        <button type="button" class="btn btn-outline-info" href="javascript:void(0)"
-                                            onclick="cus_updatetable({{ $item2->table_group_1_id }})"
-                                            value="{{ $item2->table_group_1_id }}" style="height: 90px;">
+                                {{-- id="sid{{ $item2->table_group_1_id }}" --}}
+                                    <div class="col-6 col-md-2 col-xl-2 me-2">
+                                        <a class="btn btn-outline-info" href="{{url('order_add/'.$item2->table_group_1_name)}} " style="height: auto;;width:auto">
                                             <div class="card-body shadow"
                                                 style="background-color: rgba(240, 248, 255, 0.253)">
+                                                {!! QrCode::size(80)->generate(asset('order_add/'.$item2->table_group_1_name)); !!}<br> 
                                                 <label for=""
-                                                    style="font-size:27px;color: rgb(240, 248, 255)">{{ $item2->table_group_1_name }}</label>
+                                                    style="font-size:17px;color: rgb(240, 248, 255)">{{ $item2->table_group_1_name }}</label>
                                             </div>
-                                        </button>
+                                        </a>
                                     </div>
                                 @endif
                             @endforeach
@@ -293,8 +112,8 @@
                 </div>
             </div>
        
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <div class="col-md-4 d-flex align-items-center">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top mb-3">
+                <div class="col-md-6 d-flex align-items-center">
                   
                     <span class="mb-3 mb-md-0 text-muted">
                         <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a> 
@@ -304,12 +123,14 @@
                     </span>                        
                 </div>
             
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
                     <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-instagram"></i></a></li>
                     <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-twitter"></i></a></li>
                     <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-facebook"></i></a></li>
                 </ul>
+                <br>
         </footer>
+        
     </div>
 
     {{-- <footer class="footer ms-5">

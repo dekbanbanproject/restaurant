@@ -148,8 +148,7 @@ $pos = strrpos($url, '/') + 1;
                     ห้องครัว
                 </button>
                 <ul class="dropdown-menu">
-                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal"
-                            data-bs-target="#saveModal1">เพิ่มเมนูอาหาร</a>
+                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#saveModal1">เพิ่มเมนูอาหาร</a>
 
                     <li>
                     </li>

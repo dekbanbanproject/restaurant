@@ -24,11 +24,21 @@ Route::get('reserve_table', [App\Http\Controllers\HomeController::class, 'reserv
 Route::match(['get', 'post'], 'cus_updatetable/{id}', [App\Http\Controllers\CustomerController::class, 'cus_updatetable']); //จองโต๊ะ
 Route::match(['get', 'post'], 'cus_canceltable/{id}', [App\Http\Controllers\CustomerController::class, 'cus_canceltable']); //ยกเลิก
 
+Route::get('manager_asset/assetinfomation/{id}','ManagerassetController@assetinfomation')->name('massete.assetinfomation')->withoutMiddleware('checklogin');;
 Route::get('order', [App\Http\Controllers\OrderController::class, 'order'])->name('or.order'); 
-    Route::match(['get', 'post'], 'order_save', [App\Http\Controllers\OrderController::class, 'order_save'])->name('or.order_save');
-    Route::get('order_edit/{id}', [App\Http\Controllers\OrderController::class, 'order_edit'])->name('or.order_edit');
-    Route::match(['get', 'post'], 'order_update', [App\Http\Controllers\OrderController::class, 'order_update'])->name('or.order_update');
-    Route::delete('order_destroy/{id}', [App\Http\Controllers\OrderController::class, 'order_destroy'])->name('or.order_destroy'); //
+Route::get('order_table', [App\Http\Controllers\OrderController::class, 'order_table'])->name('or.order_table'); 
+Route::get('order_add/{table}', [App\Http\Controllers\OrderController::class, 'order_add'])->name('or.order_add'); 
+Route::get('order_add_phad/{table}', [App\Http\Controllers\OrderController::class, 'order_add_phad'])->name('or.order_add_phad'); 
+Route::get('order_add_tod/{table}', [App\Http\Controllers\OrderController::class, 'order_add_tod'])->name('or.order_add_tod'); 
+Route::get('order_add_drink/{table}', [App\Http\Controllers\OrderController::class, 'order_add_drink'])->name('or.order_add_drink');
+Route::get('order_add_nuang/{table}', [App\Http\Controllers\OrderController::class, 'order_add_nuang'])->name('or.order_add_nuang');
+Route::get('order_add_sod/{table}', [App\Http\Controllers\OrderController::class, 'order_add_sod'])->name('or.order_add_sod');
+Route::get('order_add_pingyang/{table}', [App\Http\Controllers\OrderController::class, 'order_add_pingyang'])->name('or.order_add_pingyang');
+
+Route::match(['get', 'post'], 'order_save', [App\Http\Controllers\OrderController::class, 'order_save'])->name('or.order_save');
+Route::get('order_edit/{id}', [App\Http\Controllers\OrderController::class, 'order_edit'])->name('or.order_edit');
+Route::match(['get', 'post'], 'order_update', [App\Http\Controllers\OrderController::class, 'order_update'])->name('or.order_update');
+Route::delete('order_destroy/{id}', [App\Http\Controllers\OrderController::class, 'order_destroy'])->name('or.order_destroy'); //
 // Route::get('/', function () {
 
 //     if (Auth::check()) {
