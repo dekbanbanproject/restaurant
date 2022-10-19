@@ -39,9 +39,9 @@
 
 </head>
 <script>
-    function TypeAdmin() {
-        window.location.href = '{{ route('index') }}';
-    }
+    // function TypeAdmin() {
+    //     window.location.href = '{{ route('index') }}';
+    // }
 
     function kitchen_destroy(menukitchen_id) {
         Swal.fire({
@@ -117,107 +117,11 @@
               }
     }
 </script>
-<?php
-if (Auth::check()) {
-    $type = Auth::user()->type;
-    $iduser = Auth::user()->id;
-} else {
-    echo "<body onload=\"TypeAdmin()\"></body>";
-    exit();
-}
-$url = Request::url();
-$pos = strrpos($url, '/') + 1;
 
-?>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Edu VIC WA NT Beginner', cursive;
-    }
-</style>
 
-<body>
-    <nav class="navbar navbar-expand-md navbar-light me-5">
-        <div class="container-fuid">
-
-            <div class="btn-group dropend">
-                <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    ห้องครัว
-                </button>
-                <ul class="dropdown-menu">
-                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal"
-                            data-bs-target="#saveModal1">เพิ่มเมนูอาหาร</a>
-
-                    <li>
-                    </li>
-                </ul>
-            </div>
-            <br>
-            <a class="navbar-brand" href="{{ url('admin/home') }}">
-                <label for="" style="color: white;font-size:25px;"
-                    class="ms-2 mt-2 text-center">PR-Restaurant</label>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto">
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
-
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                @if (Auth::user()->img == null)
-                                    <img src="{{ asset('assets/images/default-image.jpg') }}" height="32px" width="32px"
-                                        alt=" " class="rounded-circle header-profile-user me-3">
-                                @else
-                                    <img src="{{ asset('storage/person/' . Auth::user()->img) }}" height="32px"
-                                        width="32px" alt=" " class="rounded-circle header-profile-user me-3">
-                                @endif
-                                <label for="" style="color: white">{{ Auth::user()->fname }}
-                                    {{ Auth::user()->lname }}</label>
-
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="menu4">
-        <div class="container-fluid ">
-            <h3 align="center" style="color: white">เมนูอาหาร</h3>
+<body> 
+        <div class="container">
+            <h3 align="center" style="color: white">รายการที่สั่ง</h3>
             <br />
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -232,8 +136,8 @@ $pos = strrpos($url, '/') + 1;
                                     <th style="color: white">โต๊ะ</th>
                                     <th style="color: white">รูปอาหาร</th>
                                     <th style="color: white">เมนู</th>
-                                    <th style="color: white">ราคาต้นทุน</th>
-                                    <th style="color: white">ราคาขาย</th>
+                                    <th style="color: white">จำนวน</th>
+                                    <th style="color: white">สถานะ</th>
                                     <th style="color: white" width="30%">จัดการ</th>
                                 </tr>
                             </thead>
@@ -362,23 +266,7 @@ $pos = strrpos($url, '/') + 1;
                 </div>
             </div>
         </div>
-    </div>
-
- 
-    <footer class="footer ms-5">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12">
-                    <label for="" style="color: white">2022 © PR-Restaurant</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <label for="" style="color: white"> By Dekbanbanproject</label>
-                </div>
-            </div>
-        </div>
-    </footer>
+   
     <script src="{{ asset('apkclaim/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('apkclaim/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('apkclaim/libs/select2/js/select2.min.js') }}"></script>

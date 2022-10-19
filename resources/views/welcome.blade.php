@@ -297,7 +297,9 @@
                 <div class="col-md-4 d-flex align-items-center">
                   
                     <span class="mb-3 mb-md-0 text-muted">
-                        <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-3"></i></a> 2022 &copy; PR-Restaurant
+                        <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a> 
+                        <a href="{{ url('order') }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a>
+                        2022 &copy; PR-Restaurant
                     </span>                        
                 </div>
             
