@@ -175,14 +175,14 @@
                                     <tr id="sid{{ $item->order_rep_id }}">
                                         {{-- <td style="color: white">{{ $i++ }}</td> --}}
                                         {{-- <td class="text-center" style="color: white" width="10%">{{ $item->table_group_1_name }} </td> --}}
-                                        <td style="color: white" width="5%">
+                                        <td style="color: white">
                                             <img src="{{ asset('storage/menu/'. $item->img) }}" height="90px" width="90px" alt="Image" class="img-thumbnail">
                                              
                                             </td>
                                         {{-- <td style="color: white">{{ $item->menukitchen_name }}</td> --}}
-                                        <td style="color: white">{{ $item->order_rep_qty }}</td>
-                                        <td style="color: white">{{ $item->order_rep_price }}</td>
-                                        <td style="color: white">{{ $item->order_rep_total }}</td>
+                                        <td style="color: white" class="text-center">{{ $item->order_rep_qty }}</td>
+                                        <td style="color: white" class="text-center">{{ $item->order_rep_price }}</td>
+                                        <td style="color: white" class="text-center">{{ $item->order_rep_total }}</td>
                                         @if ($item->order_rep_active == 'PREORDER')
                                             <td class="text-center"><span class="badge text-dark" style="background-color: rgb(253, 5, 220)">รอยืนยัน</span></td>
                                         @elseif ($item->order_rep_active == 'ORDER')
