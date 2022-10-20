@@ -176,7 +176,7 @@
                                         {{-- <td style="color: white">{{ $i++ }}</td> --}}
                                         {{-- <td class="text-center" style="color: white" width="10%">{{ $item->table_group_1_name }} </td> --}}
                                         <td style="color: white" width="5%">
-                                            <img src="{{ asset('storage/menu/'. $item->img) }}" height="70px" width="80px" alt="Image" class="img-thumbnail">
+                                            <img src="{{ asset('storage/menu/'. $item->img) }}" height="90px" width="90px" alt="Image" class="img-thumbnail">
                                              
                                             </td>
                                         {{-- <td style="color: white">{{ $item->menukitchen_name }}</td> --}}
