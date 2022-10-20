@@ -270,4 +270,41 @@ class OrderController extends Controller
         return response()->json(['status' => '200']);
     }
    
+    public function order_back(Request $request)
+    {
+        $data['users'] = User::orderBy('id','asc')->get();
+        $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
+        $data['order_rep'] = Order_rep::leftjoin('menukitchen','menukitchen.menukitchen_id','=','order_rep.order_rep_menukitchen_id')
+        ->orderBy('order_rep_id','DESC')
+        // ->where('table_group_1_name', '=', $table)       
+        ->get();
+
+        $countdata = Order_rep::where('order_rep_active', '!=', 'OFF')
+        ->where('order_rep_active', '!=', 'CANCEL') 
+        ->where('order_rep_active', '!=', 'PREORDER')
+        ->count();
+
+        $totaldata = Order_rep::where('order_rep_active', '!=', 'OFF')
+        ->where('order_rep_active', '!=', 'CANCEL') 
+        ->where('order_rep_active', '!=', 'PREORDER')
+        ->sum('order_rep_total');
+        return view('store_kitchen.order_back',$data,[
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
+        ] );
+    }
+    public function order_back_update(Request $request, $id)
+    {
+        $update = Order_rep::find($id);
+        $update->order_rep_active = "ORDER";
+        $update->save();
+        return response()->json(['status' => '200']);
+    }
+    public function order_back_lastupdate(Request $request, $id)
+    {
+        $update = Order_rep::find($id);
+        $update->order_rep_active = "WAITPAY";
+        $update->save();
+        return response()->json(['status' => '200']);
+    }
 }

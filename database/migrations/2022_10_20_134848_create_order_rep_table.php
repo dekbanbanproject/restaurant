@@ -27,7 +27,7 @@ return new class extends Migration
                 $table->double('order_rep_total', 10, 2)->nullable();   //  รวม         
                 $table->string('order_reqe_user')->nullable();           //ผู้สั่ง
                 $table->string('order_reci_user')->nullable();            //ผู้รับ
-                $table->enum('order_rep_active', ['ORDER','PREORDER', 'PAY','STALE','FINISH','CANCEL','OFF'])->default('OFF');
+                $table->enum('order_rep_active', ['ORDER','PREORDER', 'WAITPAY','STALE','FINISH','CANCEL','OFF'])->default('OFF');
                 $table->timestamps();
             });
         }

@@ -233,8 +233,8 @@ $pos = strrpos($url, '/') + 1;
     </li>
     
     <li style="--i:2;">
-      <a href="{{url("order")}}" target="_blank">
-        <i class="fa-solid fa-3x fa-file-invoice text-info" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="สั่งซื้อ"></i>
+      <a href="{{url("order_back")}}" target="_blank">
+        <i class="fa-solid fa-3x fa-file-invoice text-info" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="จัดการออร์เดอร์"></i>
       </a> 
     </li> 
     <li style="--i:3;">

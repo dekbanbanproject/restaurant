@@ -82,29 +82,69 @@
         })
     }
 
-    
-    function order_update(order_rep_id) {
+    function order_back_update(order_rep_id) {
         Swal.fire({
-            title: 'ต้องการยกเลิกรายการนี้ใช่ไหม?',
-            text: "รายการนี้จะถูกยกเลิกไปเลย !!",
+            title: 'ยืนยันพร้อมเสริฟรายการนี้ใช่ไหม?',
+            text: "รายการนี้จะเปลี่ยนสถานะเป็นกำลังดำเนินการ !!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#06D177',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'ใช่, ยกเลิกเดี๋ยวนี้ !',
+            confirmButtonText: 'ใช่, ยืนยันพร้อมเสริฟเดี๋ยวนี้ !',
             cancelButtonText: 'ไม่, ยกเลิก'
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ url('order_update') }}" + '/' + order_rep_id,
+                    url: "{{ url('order_back_update') }}" + '/' + order_rep_id,
                     type: 'POST',
                     data: {
                         _token: $("input[name=_token]").val()
                     },
                     success: function(response) {
                         Swal.fire({
-                            title: 'ยกเลิกรายการนี้สำเร็จ!',
-                            text: "You Cancel data success",
+                            title: 'ยืนยันพร้อมเสริฟรายการนี้สำเร็จ!',
+                            text: "You COnfirm data success",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#06D177',
+                            // cancelButtonColor: '#d33',
+                            confirmButtonText: 'เรียบร้อย'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $("#sid" + order_rep_id).remove();
+                                window.location.reload();
+                                //   window.location = "/person/person_index"; //     
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+
+    // order_back_lastupdate
+    function order_back_lastupdate(order_rep_id) {
+        Swal.fire({
+            title: 'รายการนี้เสริฟเรียบร้อย ?',
+            text: "รายการนี้จะเปลี่ยนสถานะเป็นเรียบร้อย  !!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#06D177',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่, ยืนยันเดี๋ยวนี้ !',
+            cancelButtonText: 'ไม่, ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ url('order_back_lastupdate') }}" + '/' + order_rep_id,
+                    type: 'POST',
+                    data: {
+                        _token: $("input[name=_token]").val()
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            title: 'ยืนยันเสริฟรายการนี้สำเร็จ!',
+                            text: "You COnfirm data success",
                             icon: 'success',
                             showCancelButton: false,
                             confirmButtonColor: '#06D177',
@@ -133,21 +173,22 @@
                 <div class="col-md-12 text-center mt-4">
                    
                     <label for="" class="justify-content-center" style="color: white;font-size:30px">PR - Restaurant</label>
-                    <a href="{{ url('order/' . $table) }}" type="button" class="btn position-relative text-white">
+                    {{-- <a href="" type="button" class="btn position-relative text-white">
                         <i class="fa-solid fa-2x fa-basket-shopping text-white me-2 ms-2"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                            {{$countdata}} รายการ
+                           ทั้งหมด {{$countdata}} รายการ
                           <span class="visually-hidden">unread messages</span>
                         </span>
                         <span class="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger">
-                           รวม {{ number_format($totaldata,2) }} ฿
+                           ยอดรวม {{ number_format($totaldata,2) }} ฿
                             <span class="visually-hidden">unread messages</span>
                           </span>
-                    </a>
+                    </a> --}}
                 </div> 
             </div>
 
-            <h3 class="text-center mt-3" style="color: white">รายการที่สั่ง</h3>
+            <h3 class="text-center mt-3" style="color: white">รายการที่สั่ง  ทั้งหมด <span class="badge bg-info">{{$countdata}}</span> รายการ  
+                 ยอดรวม <span class="badge bg-success">{{ number_format($totaldata,2) }} ฿</span></h3>
             <br />
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -155,11 +196,11 @@
                 <div class="panel-body">
                     <div class="table-responsive">
                         @csrf 
-                        <table class="table table-hover" id="example222">
+                        <table class="table table-hover" id="example">
                             <thead>
                                 <tr>
-                                    {{-- <th class="text-center" style="color: white">ลำดับ</th> --}}
-                                    {{-- <th class="text-center" style="color: white">โต๊ะ</th> --}}
+                                    <th class="text-center" style="color: white">ลำดับ</th>
+                                    <th class="text-center" style="color: white">โต๊ะ</th>
                                     {{-- <th class="text-center" style="color: white">รูปอาหาร</th> --}}
                                     <th class="text-center" style="color: white">รายการ</th>
                                     <th class="text-center" style="color: white">จำนวน</th>
@@ -173,10 +214,10 @@
                                 <?php $i = 1; ?>
                                 @foreach ($order_rep as $item)
                                     <tr id="sid{{ $item->order_rep_id }}">
-                                        {{-- <td style="color: white">{{ $i++ }}</td> --}}
-                                        {{-- <td class="text-center" style="color: white" width="10%">{{ $item->table_group_1_name }} </td> --}}
+                                        <td style="color: white">{{ $i++ }}</td>
+                                        <td class="text-center" style="color: white" width="10%">{{ $item->table_group_1_name }} </td>
                                         <td style="color: white">
-                                            <img src="{{ asset('storage/menu/'. $item->img) }}" height="90px" width="90px" alt="Image" class="img-thumbnail">
+                                            <img src="{{ asset('storage/menu/'. $item->img) }}" height="110px" width="110px" alt="Image" class="img-thumbnail">
                                              
                                             </td>
                                         {{-- <td style="color: white">{{ $item->menukitchen_name }}</td> --}}
@@ -187,7 +228,7 @@
                                             <td class="text-center"><span class="badge text-dark" style="background-color: rgb(253, 5, 220)">รอยืนยัน</span></td>
                                         @elseif ($item->order_rep_active == 'ORDER')
                                             <td class="text-center"><span class="badge bg-info">กำลังดำเนินการ</span></td>
-                                            @elseif ($item->order_rep_active == 'FINISH')
+                                        @elseif ($item->order_rep_active == 'FINISH')
                                             <td class="text-center"><span class="badge bg-success">เรียบร้อย</span></td>
                                         @elseif ($item->order_rep_active == 'WAITPAY')
                                             <td class="text-center"><span class="badge bg-success">รอชำระเงิน</span></td>
@@ -204,9 +245,13 @@
                                                     style="color: rgb(248, 120, 16)"></i>
                                             </button> --}}
                                             @if ($item->order_rep_active == 'PREORDER')
-                                                <a href="javascript:void(0)" onclick="order_update({{ $item->order_rep_id }})">
-                                                    <i class="fa-solid fa-trash-can text-danger"></i>
+                                                <a href="javascript:void(0)" onclick="order_back_update({{ $item->order_rep_id }})"> 
+                                                    <i class="fa-regular fa-2x fa-circle-check text-primary"></i>
                                                 </a>
+                                            @elseif ($item->order_rep_active == 'ORDER')
+                                            <a href="javascript:void(0)" onclick="order_back_lastupdate({{ $item->order_rep_id }})"> 
+                                                <i class="fa-regular fa-2x fa-circle-check text-success"></i>
+                                            </a>
                                             @elseif ($item->order_rep_active == 'CANCEL')
                                             <i class="fa-solid fa-rectangle-xmark text-danger"></i> 
                                             @elseif ($item->order_rep_active == 'STALE')
@@ -312,7 +357,7 @@
                     <span class="mb-3 mb-md-0 text-muted">
                         {{-- <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a>  --}}
                         {{-- <a href="{{ url('order/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a> --}}
-                        <a href="{{ url('order_add/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a>
+                        {{-- <a href="{{ url('order_add/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a> --}}
                         2022 &copy; PR-Restaurant
                     </span>                        
                 </div>
@@ -353,6 +398,9 @@
     <script src="{{ asset('apkclaim/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
     <script>
         $(document).ready(function() {
+             window.setTimeout( function() {
+            window.location.reload();
+            }, 10000);
             $('#example').DataTable();
             $('#example2').DataTable();          
 

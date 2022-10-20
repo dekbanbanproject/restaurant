@@ -24,7 +24,7 @@ Route::get('reserve_table', [App\Http\Controllers\HomeController::class, 'reserv
 Route::match(['get', 'post'], 'cus_updatetable/{id}', [App\Http\Controllers\CustomerController::class, 'cus_updatetable']); //จองโต๊ะ
 Route::match(['get', 'post'], 'cus_canceltable/{id}', [App\Http\Controllers\CustomerController::class, 'cus_canceltable']); //ยกเลิก
 
-Route::get('manager_asset/assetinfomation/{id}','ManagerassetController@assetinfomation')->name('massete.assetinfomation')->withoutMiddleware('checklogin');;
+// Route::get('manager_asset/assetinfomation/{id}','ManagerassetController@assetinfomation')->name('massete.assetinfomation')->withoutMiddleware('checklogin');;
 Route::get('order/{table}', [App\Http\Controllers\OrderController::class, 'order'])->name('or.order'); 
 Route::get('order_table/{table}', [App\Http\Controllers\OrderController::class, 'order_table'])->name('or.order_table'); 
 Route::get('order_add/{table}', [App\Http\Controllers\OrderController::class, 'order_add'])->name('or.order_add'); 
@@ -77,6 +77,10 @@ Route::get('manage/home', [App\Http\Controllers\HomeController::class, 'manageHo
 
 
 Route::middleware(['type'])->group(function () {
+
+    Route::get('order_back', [App\Http\Controllers\OrderController::class, 'order_back'])->name('or.order_back'); 
+    Route::match(['get', 'post'], 'order_back_update/{id}', [App\Http\Controllers\OrderController::class, 'order_back_update'])->name('or.order_back_update');
+    Route::match(['get', 'post'], 'order_back_lastupdate/{id}', [App\Http\Controllers\OrderController::class, 'order_back_lastupdate'])->name('or.order_back_lastupdate');
 
     Route::get('kitchen', [App\Http\Controllers\HomeController::class, 'kitchen'])->name('menu.kitchen');
     Route::match(['get', 'post'], 'kitchen_save', [App\Http\Controllers\HomeController::class, 'kitchen_save'])->name('menu.kitchen_save');
