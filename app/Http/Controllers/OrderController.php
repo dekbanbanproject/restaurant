@@ -11,6 +11,7 @@ use Illuminate\support\Facades\Hash;
 use App\Models\Menukitchen;
 use App\Models\Order_food;
 use App\Models\Order_food_sub;
+use App\Models\Order_rep;
 
 class OrderController extends Controller
 {
@@ -19,13 +20,24 @@ class OrderController extends Controller
     {
         $data['users'] = User::orderBy('id','asc')->get();
         $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
-        $data['order_food'] = Order_food::leftjoin('order_food_sub','order_food_sub.order_food_id','=','order_food.order_food_id')
-        ->where('order_food_active', '=', 'ORDER')
-        ->where('table_group_1_name', '=', $table)
+        $data['order_rep'] = Order_rep::leftjoin('menukitchen','menukitchen.menukitchen_id','=','order_rep.order_rep_menukitchen_id')
+        
+        ->where('table_group_1_name', '=', $table)       
         ->get();
-
+        $countdata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '!=', 'OFF')
+        ->where('order_rep_active', '!=', 'CANCEL') 
+        ->where('order_rep_active', '!=', 'PREORDER')
+        ->count();
+        $totaldata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '!=', 'OFF')
+        ->where('order_rep_active', '!=', 'CANCEL') 
+        ->where('order_rep_active', '!=', 'PREORDER')
+        ->sum('order_rep_total');
         return view('store_kitchen.order',$data,[
-            'table'    =>    $table
+            'table'        =>    $table,
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
         ]);
     }
     public function order_table(Request $request,$table)
@@ -45,8 +57,15 @@ class OrderController extends Controller
         $data['menukitchen'] = Menukitchen::leftjoin('menukitchen_category','menukitchen_category.menukitchen_category_id','=','menukitchen.menukitchen_category')
         ->where('menukitchen_category', '=', '1')
         ->get();
+
+        $countdata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '=', 'PREORDER')
+        ->count();
+        $totaldata = Order_rep::where('table_group_1_name', '=', $table)->where('order_rep_active', '=', 'PREORDER')->sum('order_rep_total');
         return view('store_kitchen.order_add',$data,[
-            'table'    =>    $table
+            'table'        =>    $table,
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
         ]);
     }
     public function order_add_phad(Request $request,$table)
@@ -57,8 +76,14 @@ class OrderController extends Controller
         $data['menukitchen'] = Menukitchen::leftjoin('menukitchen_category','menukitchen_category.menukitchen_category_id','=','menukitchen.menukitchen_category')
         ->where('menukitchen_category', '=', '2')
         ->get();
+        $countdata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '=', 'PREORDER')
+        ->count();
+        $totaldata = Order_rep::where('table_group_1_name', '=', $table)->where('order_rep_active', '=', 'PREORDER')->sum('order_rep_total');
         return view('store_kitchen.order_add_phad',$data,[
-            'table'    =>    $table
+            'table'        =>    $table,
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
         ]);
     }
     public function order_add_tod(Request $request,$table)
@@ -69,8 +94,15 @@ class OrderController extends Controller
         $data['menukitchen'] = Menukitchen::leftjoin('menukitchen_category','menukitchen_category.menukitchen_category_id','=','menukitchen.menukitchen_category')
         ->where('menukitchen_category', '=', '3')
         ->get();
+        $countdata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '=', 'PREORDER')
+        ->count();
+        $totaldata = Order_rep::where('table_group_1_name', '=', $table)->where('order_rep_active', '=', 'PREORDER')->sum('order_rep_total');
+
         return view('store_kitchen.order_add_tod',$data,[
-            'table'    =>    $table
+            'table'        =>    $table,
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
         ]);
     }
     public function order_add_drink(Request $request,$table)
@@ -81,8 +113,16 @@ class OrderController extends Controller
         $data['menukitchen'] = Menukitchen::leftjoin('menukitchen_category','menukitchen_category.menukitchen_category_id','=','menukitchen.menukitchen_category')
         ->where('menukitchen_category', '=', '4')
         ->get();
+
+        $countdata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '=', 'PREORDER')
+        ->count();
+        $totaldata = Order_rep::where('table_group_1_name', '=', $table)->where('order_rep_active', '=', 'PREORDER')->sum('order_rep_total');
+
         return view('store_kitchen.order_add_drink',$data,[
-            'table'    =>    $table
+            'table'        =>    $table,
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
         ]);
     }
     public function order_add_nuang(Request $request,$table)
@@ -93,8 +133,15 @@ class OrderController extends Controller
         $data['menukitchen'] = Menukitchen::leftjoin('menukitchen_category','menukitchen_category.menukitchen_category_id','=','menukitchen.menukitchen_category')
         ->where('menukitchen_category', '=', '5')
         ->get();
+
+        $countdata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '=', 'PREORDER')
+        ->count();
+        $totaldata = Order_rep::where('table_group_1_name', '=', $table)->where('order_rep_active', '=', 'PREORDER')->sum('order_rep_total');
         return view('store_kitchen.order_add_nuang',$data,[
-            'table'    =>    $table
+            'table'    =>    $table,
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
         ]);
     }
     public function order_add_sod(Request $request,$table)
@@ -105,8 +152,15 @@ class OrderController extends Controller
         $data['menukitchen'] = Menukitchen::leftjoin('menukitchen_category','menukitchen_category.menukitchen_category_id','=','menukitchen.menukitchen_category')
         ->where('menukitchen_category', '=', '6')
         ->get();
+        $countdata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '=', 'PREORDER')
+        ->count();
+        $totaldata = Order_rep::where('table_group_1_name', '=', $table)->where('order_rep_active', '=', 'PREORDER')->sum('order_rep_total');
+
         return view('store_kitchen.order_add_sod',$data,[
-            'table'    =>    $table
+            'table'    =>    $table,
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
         ]);
     }
     public function order_add_pingyang(Request $request,$table)
@@ -117,9 +171,57 @@ class OrderController extends Controller
         $data['menukitchen'] = Menukitchen::leftjoin('menukitchen_category','menukitchen_category.menukitchen_category_id','=','menukitchen.menukitchen_category')
         ->where('menukitchen_category', '=', '7')
         ->get();
+        $countdata = Order_rep::where('table_group_1_name', '=', $table)
+        ->where('order_rep_active', '=', 'PREORDER')
+        ->count();
+        $totaldata = Order_rep::where('table_group_1_name', '=', $table)->where('order_rep_active', '=', 'PREORDER')->sum('order_rep_total');
         return view('store_kitchen.order_add_pingyang',$data,[
-            'table'    =>    $table
+            'table'    =>    $table,
+            'countdata'    =>    $countdata,
+            'totaldata'    =>    $totaldata
         ]);
+    }
+    public function order_save(Request $request)
+    {
+        $date = date("Y-m-d");
+        $q = $request->qty; ;
+        $p = $request->price; 
+        $add = new Order_rep();
+        $add->order_rep_menukitchen_id = $request->menukitchen_id;
+
+        $tab = $request->table;
+        $nametable = Table_group_1::where('table_group_1_name','=',$tab)->first();
+
+        $add->table_group_1_id = $nametable->table_group_1_id;
+        $add->table_group_1_name = $nametable->table_group_1_name;
+
+        $add->order_rep_date = $date;
+
+        $add->order_rep_menukitchen_id = $request->menukitchen_id;
+        $add->order_rep_qty =  $q; 
+        $add->order_rep_price = $p; 
+        // $add->order_rep_discount =" "; 
+        $add->order_rep_total = $q * $p;   
+        $add->order_rep_active = "PREORDER";
+        $add->save();
+
+        return redirect()->back();
+        // return response()->json([
+        //     'status'     => '200',
+        // ]);
+    }
+    public function order_destroy(Request $request, $id)
+    {
+        $del = Order_rep::find($id);
+        $del->delete();
+        return response()->json(['status' => '200']);
+    }
+    public function order_update(Request $request, $id)
+    {
+        $update = Order_rep::find($id);
+        $update->order_rep_active = "CANCEL";
+        $update->save();
+        return response()->json(['status' => '200']);
     }
     public function customer_save(Request $request)
     {

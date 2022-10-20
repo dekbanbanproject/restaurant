@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
+    <title>PR - Restaurant </title>
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('apkclaim/images/logo150.ico') }}">
@@ -17,7 +17,8 @@
     <link href="{{ asset('apkclaim/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{ asset('assets/fontawesome/css/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/menudis.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/menudis.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/menufooddis.css') }}" rel="stylesheet">
     <link href="{{ asset('sky16/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
@@ -39,11 +40,9 @@
 
 </head>
 <script>
-    // function TypeAdmin() {
-    //     window.location.href = '{{ route('index') }}';
-    // }
+    
 
-    function kitchen_destroy(menukitchen_id) {
+    function order_destroy(order_rep_id) {
         Swal.fire({
             title: 'ต้องการลบรายการนี้ใช่ไหม?',
             text: "รายการนี้จะถูกลบไปเลย !!",
@@ -56,7 +55,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ url('kitchen_destroy') }}" + '/' + menukitchen_id,
+                    url: "{{ url('order_destroy') }}" + '/' + order_rep_id,
                     type: 'delete',
                     data: {
                         _token: $("input[name=_token]").val()
@@ -72,7 +71,7 @@
                             confirmButtonText: 'เรียบร้อย'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                $("#sid" + menukitchen_id).remove();
+                                $("#sid" + order_rep_id).remove();
                                 window.location.reload();
                                 //   window.location = "/person/person_index"; //     
                             }
@@ -83,39 +82,47 @@
         })
     }
 
-    // function addpic(input) {
-    //     var fileInput = document.getElementById('img');
-    //     var url = input.value;
-    //     var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-    //     if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext ==
-    //             "jpg")) {
-    //         var reader = new FileReader();
-    //         reader.onload = function(e) {
-    //             $('#add_upload_preview').attr('src', e.target.result);
-    //         }
-    //         reader.readAsDataURL(input.files[0]);
-    //     } else {
-    //         alert('กรุณาอัพโหลดไฟล์ประเภทรูปภาพ .jpeg/.jpg/.png/.gif .');
-    //         fileInput.value = '';
-    //         return false;
-    //     }
-    // }
-    // function editpic(input) {
-    //   var fileInput = document.getElementById('img');
-    //   var url = input.value;
-    //   var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-    //       if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
-    //           var reader = new FileReader();    
-    //           reader.onload = function (e) {
-    //               $('#edit_upload_preview').attr('src', e.target.result);
-    //           }    
-    //           reader.readAsDataURL(input.files[0]);
-    //       }else{    
-    //           alert('กรุณาอัพโหลดไฟล์ประเภทรูปภาพ .jpeg/.jpg/.png/.gif .');
-    //           fileInput.value = '';
-    //           return false;
-    //           }
-    // }
+    
+    function order_update(order_rep_id) {
+        Swal.fire({
+            title: 'ต้องการยกเลิกรายการนี้ใช่ไหม?',
+            text: "รายการนี้จะถูกยกเลิกไปเลย !!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#06D177',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ใช่, ยกเลิกเดี๋ยวนี้ !',
+            cancelButtonText: 'ไม่, ยกเลิก'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{{ url('order_update') }}" + '/' + order_rep_id,
+                    type: 'POST',
+                    data: {
+                        _token: $("input[name=_token]").val()
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            title: 'ยกเลิกรายการนี้สำเร็จ!',
+                            text: "You Cancel data success",
+                            icon: 'success',
+                            showCancelButton: false,
+                            confirmButtonColor: '#06D177',
+                            // cancelButtonColor: '#d33',
+                            confirmButtonText: 'เรียบร้อย'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $("#sid" + order_rep_id).remove();
+                                window.location.reload();
+                                //   window.location = "/person/person_index"; //     
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+ 
 </script>
 
 
@@ -123,11 +130,20 @@
         <div class="container">
 
             <div class="row"> 
-                <div class="col-md-12 text-center mt-2">
+                <div class="col-md-12 text-center mt-4">
                    
                     <label for="" class="justify-content-center" style="color: white;font-size:30px">PR - Restaurant</label>
-                    {{-- <i class="fa-solid fa-2x fa-house text-white me-3 ms-4"></i> --}}
-                     {{-- <i class="fa-solid fa-2x fa-basket-shopping text-white me-2"></i> --}}
+                    <a href="{{ url('order/' . $table) }}" type="button" class="btn position-relative text-white">
+                        <i class="fa-solid fa-2x fa-basket-shopping text-white me-2 ms-2"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                            {{$countdata}} รายการ
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
+                        <span class="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-danger">
+                           รวม {{ number_format($totaldata,2) }} ฿
+                            <span class="visually-hidden">unread messages</span>
+                          </span>
+                    </a>
                 </div> 
             </div>
 
@@ -139,57 +155,69 @@
                 <div class="panel-body">
                     <div class="table-responsive">
                         @csrf 
-                        <table class="table table-hover" id="example">
+                        <table class="table table-hover" id="example222">
                             <thead>
                                 <tr>
-                                    <th style="color: white">ลำดับ</th>
-                                    <th style="color: white">โต๊ะ</th>
-                                    <th style="color: white">รูปอาหาร</th>
-                                    <th style="color: white">เมนู</th>
-                                    <th style="color: white">จำนวน</th>
-                                    <th style="color: white">สถานะ</th>
-                                    <th style="color: white" width="30%">จัดการ</th>
+                                    {{-- <th class="text-center" style="color: white">ลำดับ</th> --}}
+                                    {{-- <th class="text-center" style="color: white">โต๊ะ</th> --}}
+                                    {{-- <th class="text-center" style="color: white">รูปอาหาร</th> --}}
+                                    <th class="text-center" style="color: white">รายการ</th>
+                                    <th class="text-center" style="color: white">จำนวน</th>
+                                    <th class="text-center" style="color: white">ราคา</th>
+                                    <th class="text-center" style="color: white">รวม</th>
+                                    <th class="text-center" style="color: white">สถานะ</th>
+                                    <th class="text-center" style="color: white" >จัดการ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- <?php $i = 1; ?>
-                                @foreach ($menukitchen as $item)
-                                    <tr id="sid{{ $item->menukitchen_id }}">
-                                        <td style="color: white">{{ $i++ }}</td>
-                                        <td class="text-center" width="10%">
-                                            <?php
-                                            $generator = new \Picqer\Barcode\BarcodeGeneratorJPG();
-                                            $Pi = '<img src="data:image/jpeg;base64,' . base64_encode($generator->getBarcode($item->menukitchen_code, $generator::TYPE_CODE_128, 2, 30)) . '" height="30px" width="95%" > ';
-                                            echo $Pi;
-                                            ?>
-
-                                            <label for=""
-                                                style="color: white">{{ $item->menukitchen_code }}</label>
-
-                                        </td>
-                                        <td style="color: white">
-                                            <img src="{{ asset('storage/menu/' . $item->img) }}" height="70px"
-                                                width="70px" alt="Image" class="img-thumbnail">
-                                        </td>
-                                        <td style="color: white">{{ $item->menukitchen_name }}</td>
-                                        <td style="color: white">{{ $item->menukitchen_pricecost }}</td>
-                                        <td style="color: white">{{ $item->menukitchen_pricesale }}</td>
-                                        <td style="color: white" width="30%">
-                                            
-                                                <button type="button" class="btn btn-outline-warning" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updteModal{{ $item->menukitchen_id }}">
-                                                <i class="fa-solid fa-pen-to-square "
+                                <?php $i = 1; ?>
+                                @foreach ($order_rep as $item)
+                                    <tr id="sid{{ $item->order_rep_id }}">
+                                        {{-- <td style="color: white">{{ $i++ }}</td> --}}
+                                        {{-- <td class="text-center" style="color: white" width="10%">{{ $item->table_group_1_name }} </td> --}}
+                                        <td style="color: white" width="5%">
+                                            <img src="{{ asset('storage/menu/'. $item->img) }}" height="70px" width="80px" alt="Image" class="img-thumbnail">
+                                             
+                                            </td>
+                                        {{-- <td style="color: white">{{ $item->menukitchen_name }}</td> --}}
+                                        <td style="color: white">{{ $item->order_rep_qty }}</td>
+                                        <td style="color: white">{{ $item->order_rep_price }}</td>
+                                        <td style="color: white">{{ $item->order_rep_total }}</td>
+                                        @if ($item->order_rep_active == 'PREORDER')
+                                            <td class="text-center"><span class="badge text-dark" style="background-color: rgb(253, 5, 220)">รอยืนยัน</span></td>
+                                        @elseif ($item->order_rep_active == 'ORDER')
+                                            <td class="text-center"><span class="badge bg-info">กำลังดำเนินการ</span></td>
+                                        @elseif ($item->order_rep_active == 'FINISH')
+                                            <td class="text-center"><span class="badge bg-success">เรียบร้อย</span></td>
+                                        @elseif ($item->order_rep_active == 'CANCEL')
+                                            <td class="text-center"><span class="badge bg-danger">ยกเลิก</span></td>
+                                        @else
+                                        <td class="text-center"><span class="badge text-white" style="background-color: rgb(230, 38, 4)">ค้างชำระ</span></td>
+                                        @endif
+                                        
+                                        {{-- <td style="color: white">{{ $item->order_rep_active }}</td> --}}
+                                        <td style="color: white" class="text-center">                                            
+                                            {{-- <button type="button" class="btn btn-outline-warning" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updteModal{{ $item->menukitchen_id }}">
+                                            <i class="fa-solid fa-pen-to-square "
                                                     style="color: rgb(248, 120, 16)"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-outline-danger btn-sm"
-                                                href="javascript:void(0)"
-                                                onclick="kitchen_destroy({{ $item->menukitchen_id }})">
-                                                <i class="fa-solid fa-trash-can text-danger"></i>
-                                            </button>
+                                            </button> --}}
+                                            @if ($item->order_rep_active == 'PREORDER')
+                                                <a href="javascript:void(0)" onclick="order_update({{ $item->order_rep_id }})">
+                                                    <i class="fa-solid fa-trash-can text-danger"></i>
+                                                </a>
+                                            @elseif ($item->order_rep_active == 'CANCEL')
+                                            <i class="fa-solid fa-rectangle-xmark text-danger"></i> 
+                                            @elseif ($item->order_rep_active == 'STALE')
+                                            <i class="fa-solid fa-rectangle-xmark text-white" style="background-color: rgb(230, 38, 4)"></i> 
+                                            @else 
+                                                <i class="fa-solid fa-circle-check text-success"></i>
+                                            @endif
+                                            
                                         </td>
                                     </tr>
 
                                     <!-- Modal updteModal-->
-                                    <div class="modal fade" id="updteModal{{ $item->menukitchen_id }}" tabindex="-1" aria-labelledby="updteModalLabel" aria-hidden="true">
+                                    {{--<div class="modal fade" id="updteModal{{ $item->menukitchen_id }}" tabindex="-1" aria-labelledby="updteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -267,9 +295,9 @@
                                             </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                     
-                                @endforeach --}}
+                                @endforeach 
                             </tbody>
                         </table>
                     </div>
@@ -280,16 +308,16 @@
                 <div class="col-md-6 d-flex align-items-center">
                   
                     <span class="mb-3 mb-md-0 text-muted">
-                        <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a> 
-                        <a href="{{ url('order/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a>
-                        <a href="{{ url('order_add/'.$table) }}"><i class="fa-solid fa-2x fa-bowl-food me-4 ms-4"></i></a>
+                        {{-- <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a>  --}}
+                        {{-- <a href="{{ url('order/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a> --}}
+                        <a href="{{ url('order_add/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a>
                         2022 &copy; PR-Restaurant
                     </span>                        
                 </div>
             
                 <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
                     <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-instagram"></i></a></li>
-                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-twitter"></i></a></li>
+                    {{-- <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-twitter"></i></a></li> --}}
                     <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-facebook"></i></a></li>
                 </ul>
                 <br>

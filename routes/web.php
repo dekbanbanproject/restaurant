@@ -35,10 +35,14 @@ Route::get('order_add_nuang/{table}', [App\Http\Controllers\OrderController::cla
 Route::get('order_add_sod/{table}', [App\Http\Controllers\OrderController::class, 'order_add_sod'])->name('or.order_add_sod');
 Route::get('order_add_pingyang/{table}', [App\Http\Controllers\OrderController::class, 'order_add_pingyang'])->name('or.order_add_pingyang');
 
-Route::match(['get', 'post'], 'order_save', [App\Http\Controllers\OrderController::class, 'order_save'])->name('or.order_save');
-Route::get('order_edit/{id}', [App\Http\Controllers\OrderController::class, 'order_edit'])->name('or.order_edit');
-Route::match(['get', 'post'], 'order_update', [App\Http\Controllers\OrderController::class, 'order_update'])->name('or.order_update');
+Route::match(['get', 'post'],'order_save', [App\Http\Controllers\OrderController::class, 'order_save'])->name('or.order_save');
 Route::delete('order_destroy/{id}', [App\Http\Controllers\OrderController::class, 'order_destroy'])->name('or.order_destroy'); //
+Route::match(['get', 'post'], 'order_update/{id}', [App\Http\Controllers\OrderController::class, 'order_update'])->name('or.order_update');
+
+// Route::match(['get', 'post'], 'order_save', [App\Http\Controllers\OrderController::class, 'order_save'])->name('or.order_save');
+// Route::get('order_edit/{id}', [App\Http\Controllers\OrderController::class, 'order_edit'])->name('or.order_edit');
+// Route::match(['get', 'post'], 'order_update', [App\Http\Controllers\OrderController::class, 'order_update'])->name('or.order_update');
+
 // Route::get('/', function () {
 
 //     if (Auth::check()) {
