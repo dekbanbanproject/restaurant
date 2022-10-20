@@ -33,23 +33,32 @@
     {{-- <div class="menu2"> --}}
       
         <div class="container-fluid ">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col"></div>
                 <div class="col-md-3 mt-5">
                     <label for="" class="justify-content-center" style="color: white;font-size:40px">PR - Restaurant</label>
                 </div>
                 <div class="col"></div>
             </div>
-            
+             --}}
+             <div class="row"> 
+                <div class="col-md-12 text-center mt-2">
+                   
+                    <label for="" class="justify-content-center" style="color: white;font-size:30px">PR - Restaurant</label>
+                    <i class="fa-solid fa-2x fa-house text-white me-3 ms-4"></i>
+                     <i class="fa-solid fa-2x fa-basket-shopping text-white me-2"></i>
+                </div> 
+            </div>
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 text-center">
+                    <hr  style="color: white" class="mt-3">
                     <div class="card-body">
                         <div class="row" >
                             <?php $i = 1; ?>
                             @foreach ($table_group_1 as $item1)
                                 @if ($item1->table_group_1_active == 'TRUE')
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                    <div class="col-6 col-md-2 col-xl-2 mt-3" >
                                         <a class="btn btn-outline-danger" href="{{url('order_add/'.$item1->table_group_1_name)}}" style="height: auto;width:auto">
                                             <div class="card-body shadow"
                                                 style="background-color: rgba(255, 6, 6, 0.301)">
@@ -60,7 +69,7 @@
                                         </a>
                                     </div>
                                 @else
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                    <div class="col-6 col-md-2 col-xl-2 mt-3" >
                                         <a class="btn btn-outline-info" href="{{url('order_add/'.$item1->table_group_1_name)}} " style="height: auto;width:auto">
                                             <div class="card-body shadow"
                                                 style="background-color: rgba(240, 248, 255, 0.253)">
@@ -76,13 +85,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                
+                <div class="col-md-6 text-center">
+                    <hr  style="color: white" class="mt-3">
                     <div class="card-body">
                         <div class="row" >
                             <?php $i = 1; ?>
                             @foreach ($table_group_1B as $item2)
                                 @if ($item2->table_group_1_active == 'TRUE')
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                    <div class="col-6 col-md-2 col-xl-2 mt-3" >
                                         <a class="btn btn-outline-danger" href="{{url('order_add/'.$item2->table_group_1_name)}} " style="height: auto;width:auto">
                                             <div class="card-body shadow"
                                                 style="background-color: rgba(255, 6, 6, 0.301)" >
@@ -94,7 +105,7 @@
                                     </div>
                                 @else
                                 {{-- id="sid{{ $item2->table_group_1_id }}" --}}
-                                    <div class="col-6 col-md-2 col-xl-2 me-2">
+                                    <div class="col-6 col-md-2 col-xl-2 mt-3">
                                         <a class="btn btn-outline-info" href="{{url('order_add/'.$item2->table_group_1_name)}} " style="height: auto;;width:auto">
                                             <div class="card-body shadow"
                                                 style="background-color: rgba(240, 248, 255, 0.253)">
@@ -117,8 +128,8 @@
                   
                     <span class="mb-3 mb-md-0 text-muted">
                         <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a> 
-                        <a href="{{ url('order') }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a>
-                        <a href="{{ url('order_table') }}"><i class="fa-solid fa-2x fa-bowl-food me-4 ms-4"></i></a>
+                        <a href="{{ url('order/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a>
+                        <a href="{{ url('order_table/'.$table) }}"><i class="fa-solid fa-2x fa-bowl-food me-4 ms-4"></i></a>
                         2022 &copy; PR-Restaurant
                     </span>                        
                 </div>

@@ -25,8 +25,8 @@ Route::match(['get', 'post'], 'cus_updatetable/{id}', [App\Http\Controllers\Cust
 Route::match(['get', 'post'], 'cus_canceltable/{id}', [App\Http\Controllers\CustomerController::class, 'cus_canceltable']); //ยกเลิก
 
 Route::get('manager_asset/assetinfomation/{id}','ManagerassetController@assetinfomation')->name('massete.assetinfomation')->withoutMiddleware('checklogin');;
-Route::get('order', [App\Http\Controllers\OrderController::class, 'order'])->name('or.order'); 
-Route::get('order_table', [App\Http\Controllers\OrderController::class, 'order_table'])->name('or.order_table'); 
+Route::get('order/{table}', [App\Http\Controllers\OrderController::class, 'order'])->name('or.order'); 
+Route::get('order_table/{table}', [App\Http\Controllers\OrderController::class, 'order_table'])->name('or.order_table'); 
 Route::get('order_add/{table}', [App\Http\Controllers\OrderController::class, 'order_add'])->name('or.order_add'); 
 Route::get('order_add_phad/{table}', [App\Http\Controllers\OrderController::class, 'order_add_phad'])->name('or.order_add_phad'); 
 Route::get('order_add_tod/{table}', [App\Http\Controllers\OrderController::class, 'order_add_tod'])->name('or.order_add_tod'); 

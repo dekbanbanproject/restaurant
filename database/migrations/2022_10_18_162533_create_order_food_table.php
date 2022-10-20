@@ -22,6 +22,7 @@ return new class extends Migration
                 $table->double('order_food_discount', 10, 2)->nullable();
                 $table->double('order_food_total', 10, 2)->nullable();
                 $table->string('table_group_1_id')->nullable(); //โต๊ะ 
+                $table->string('table_group_1_name')->nullable(); //โต๊ะ 
                 $table->string('user_order')->nullable(); //ผู้สั่ง
                 $table->string('user_orderrep')->nullable(); //ผู้รับ
                 $table->enum('order_food_active', ['ORDER', 'PAY','STALE','FINISH','CANCEL','OFF'])->default('OFF');

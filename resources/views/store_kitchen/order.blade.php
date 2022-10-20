@@ -83,45 +83,55 @@
         })
     }
 
-    function addpic(input) {
-        var fileInput = document.getElementById('img');
-        var url = input.value;
-        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-        if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext ==
-                "jpg")) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#add_upload_preview').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            alert('กรุณาอัพโหลดไฟล์ประเภทรูปภาพ .jpeg/.jpg/.png/.gif .');
-            fileInput.value = '';
-            return false;
-        }
-    }
-    function editpic(input) {
-      var fileInput = document.getElementById('img');
-      var url = input.value;
-      var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-          if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
-              var reader = new FileReader();    
-              reader.onload = function (e) {
-                  $('#edit_upload_preview').attr('src', e.target.result);
-              }    
-              reader.readAsDataURL(input.files[0]);
-          }else{    
-              alert('กรุณาอัพโหลดไฟล์ประเภทรูปภาพ .jpeg/.jpg/.png/.gif .');
-              fileInput.value = '';
-              return false;
-              }
-    }
+    // function addpic(input) {
+    //     var fileInput = document.getElementById('img');
+    //     var url = input.value;
+    //     var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    //     if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext ==
+    //             "jpg")) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $('#add_upload_preview').attr('src', e.target.result);
+    //         }
+    //         reader.readAsDataURL(input.files[0]);
+    //     } else {
+    //         alert('กรุณาอัพโหลดไฟล์ประเภทรูปภาพ .jpeg/.jpg/.png/.gif .');
+    //         fileInput.value = '';
+    //         return false;
+    //     }
+    // }
+    // function editpic(input) {
+    //   var fileInput = document.getElementById('img');
+    //   var url = input.value;
+    //   var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    //       if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+    //           var reader = new FileReader();    
+    //           reader.onload = function (e) {
+    //               $('#edit_upload_preview').attr('src', e.target.result);
+    //           }    
+    //           reader.readAsDataURL(input.files[0]);
+    //       }else{    
+    //           alert('กรุณาอัพโหลดไฟล์ประเภทรูปภาพ .jpeg/.jpg/.png/.gif .');
+    //           fileInput.value = '';
+    //           return false;
+    //           }
+    // }
 </script>
 
 
 <body> 
         <div class="container">
-            <h3 align="center" style="color: white">รายการที่สั่ง</h3>
+
+            <div class="row"> 
+                <div class="col-md-12 text-center mt-2">
+                   
+                    <label for="" class="justify-content-center" style="color: white;font-size:30px">PR - Restaurant</label>
+                    {{-- <i class="fa-solid fa-2x fa-house text-white me-3 ms-4"></i> --}}
+                     {{-- <i class="fa-solid fa-2x fa-basket-shopping text-white me-2"></i> --}}
+                </div> 
+            </div>
+
+            <h3 class="text-center mt-3" style="color: white">รายการที่สั่ง</h3>
             <br />
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -265,6 +275,25 @@
                     </div>
                 </div>
             </div>
+
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top mb-3">
+                <div class="col-md-6 d-flex align-items-center">
+                  
+                    <span class="mb-3 mb-md-0 text-muted">
+                        <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a> 
+                        <a href="{{ url('order/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a>
+                        <a href="{{ url('order_add/'.$table) }}"><i class="fa-solid fa-2x fa-bowl-food me-4 ms-4"></i></a>
+                        2022 &copy; PR-Restaurant
+                    </span>                        
+                </div>
+            
+                <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-instagram"></i></a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-twitter"></i></a></li>
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-facebook"></i></a></li>
+                </ul>
+                <br>
+        </footer>
         </div>
    
     <script src="{{ asset('apkclaim/libs/jquery/jquery.min.js') }}"></script>

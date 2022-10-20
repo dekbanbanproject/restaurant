@@ -9,21 +9,33 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\support\Facades\Hash;
 use App\Models\Menukitchen;
+use App\Models\Order_food;
+use App\Models\Order_food_sub;
+
 class OrderController extends Controller
 {
  
-    public function order()
+    public function order(Request $request,$table)
     {
         $data['users'] = User::orderBy('id','asc')->get();
         $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
-        return view('store_kitchen.order',$data);
+        $data['order_food'] = Order_food::leftjoin('order_food_sub','order_food_sub.order_food_id','=','order_food.order_food_id')
+        ->where('order_food_active', '=', 'ORDER')
+        ->where('table_group_1_name', '=', $table)
+        ->get();
+
+        return view('store_kitchen.order',$data,[
+            'table'    =>    $table
+        ]);
     }
-    public function order_table(Request $request)
+    public function order_table(Request $request,$table)
     { 
         $data['users'] = User::get();
         $data['table_group_1'] = Table_group_1::where('table_group_1_zone', '=', 'A')->get();
         $data['table_group_1B'] = Table_group_1::where('table_group_1_zone', '=', 'B')->get();
-        return view('store_kitchen.order_table',$data);
+        return view('store_kitchen.order_table',$data,[
+            'table'    =>    $table
+        ]);
     }
     public function order_add(Request $request,$table)
     { 

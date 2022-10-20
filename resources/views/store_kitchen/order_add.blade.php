@@ -37,7 +37,8 @@
                
                 <label for="" class="justify-content-center" style="color: white;font-size:30px">PR - Restaurant</label>
                 <i class="fa-solid fa-2x fa-house text-white me-3 ms-4"></i>
-                 <i class="fa-solid fa-2x fa-basket-shopping text-white me-2"></i>
+                <a href="{{url('order/'.$table)}}"><i class="fa-solid fa-2x fa-basket-shopping text-white me-2"></i></a>
+                 
             </div> 
         </div>
         <hr  style="color: white">

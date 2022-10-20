@@ -18,7 +18,8 @@
     <link href="{{ asset('apkclaim//libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{ asset('assets/fontawesome/css/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/menudis.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/menudis.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/menufooddis.css') }}" rel="stylesheet">
     <link href="{{ asset('sky16/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('sky16/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
@@ -28,204 +29,38 @@
   
 </head>
 
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Edu VIC WA NT Beginner', cursive;
-    }
-
-    body {
-        width: 100%;
-        height: 100vh;
-        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-            url(/restaurant/public/assets/images/restaurant.jpg)no-repeat 50%;
-        /* url(/assets/images/restaurant.jpg)no-repeat 50%; */ 
-        background-size: cover;
-        background-attachment: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .container {
-        position: relative;
-    }
-
-    .form {
-        position: relative;
-        z-index: 100;
-        width: 500px;
-        height: 500px;
-        background-color: rgba(240, 248, 255, 0.158);
-        border-radius: 20px;
-        backdrop-filter: blur(2px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-
-    .logo {
-        width: 200px;
-        height: 200px;
-        background:
-            url(/restaurant/public/assets/images/restaurant_cup.png)no-repeat 50%;
-        /* url(/assets/images/restaurant_cup.png)no-repeat 25%; */
-        background-size: cover;
-        /* background-attachment: fixed; */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .h1 {
-        color: rgb(255, 255, 255);
-        font-weight: 500;
-        margin-bottom: 20px;
-        font-size: 50px;
-        margin-top: 20px;
-    }
-
-    .username {
-        width: 250px;
-        background: none;
-        outline: none;
-        border: none;
-        margin: 15px 0px;
-        border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
-        padding: 10px;
-        color: aliceblue;
-        font-size: 18px;
-        transition: 0.2s ease-in-out;
-        margin-top: 50px;
-    }
-
-    .password {
-        width: 250px;
-        background: none;
-        outline: none;
-        border: none;
-        margin: 5px 0px;
-        border-bottom: rgba(240, 248, 255, 0.418) 1px solid;
-        padding: 10px;
-        color: aliceblue;
-        font-size: 18px;
-        transition: 0.2s ease-in-out;
-    }
-
-    ::placeholder {
-        color: rgba(255, 255, 255, 0.582);
-    }
-
-    ::focus {
-        border-bottom: aliceblue 1px solid;
-    }
-
-    .fa-solid {
-        transition: 0.2s ease-in-out;
-        color: rgba(240, 248, 255, 0.59);
-        margin-right: 10px;
-        /* margin-top: 50px; */
-    }
-
-     
-
-    .footer {
-        width: 400px;
-        height: 40px;
-        margin-top: 100px;
-        font-weight: 500;
-        color: aliceblue;
-        outline: none;
-        border: none;
-        background: rgba(240, 248, 255, 0.2);
-        backdrop-filter: blur(15px);
-        border-radius: 20px;
-        font-size: 20px;
-        transition: 0.2s;
-    }
-
-    &::hover {
-        background: aliceblue;
-        color: gray;
-        font-weight: 500;
-    }
-
-    .circle1 {
-        position: absolute;
-        width: 290px;
-        height: 290px;
-        background: rgba(240, 248, 255, 0.1);
-        border-radius: 50%;
-        top: 60%;
-        left: 75%;
-        z-index: -1;
-        animation: float 2s 0.5s ease-in-out infinite;
-    }
-
-    .circle2 {
-        position: absolute;
-        width: 170px;
-        height: 170px;
-        background: rgba(240, 248, 255, 0.1);
-        border-radius: 50%;
-        top: -15%;
-        right: 25%;
-        z-index: -1;
-        animation: float 2s ease-in-out infinite;
-    }
-
-    .circle3 {
-        position: absolute;
-        width: 220px;
-        height: 220px;
-        background: rgba(240, 248, 255, 0.1);
-        border-radius: 50%;
-        top: 50%;
-        right: 80%;
-        z-index: -1;
-        animation: float 2s 0.7s ease-in-out infinite;
-    }
-
-    @keyframes float {
-        0% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-20px);
-        }
-
-        100% {
-            transform: translateY(0);
-        }
-    }
-</style>
 
 <body>
   
     {{-- <div class="menu2"> --}}
       
-        <div class="container-fluid ">
-            <div class="row">
+      <div class="container-fluid ">
+             {{--  <div class="row">
                 <div class="col"></div>
                 <div class="col-md-3 mt-5">
                     <label for="" class="justify-content-center" style="color: white;font-size:40px">PR - Restaurant</label>
                 </div>
                 <div class="col"></div>
+            </div> --}}
+            <div class="row"> 
+                <div class="col-md-12 text-center mt-2">
+                   
+                    <label for="" class="justify-content-center" style="color: white;font-size:30px">PR - Restaurant</label>
+                    <i class="fa-solid fa-2x fa-house text-white me-3 ms-4"></i>
+                     <i class="fa-solid fa-2x fa-basket-shopping text-white me-2"></i>
+                </div> 
             </div>
-            
+            {{-- <hr  style="color: white"> --}}
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 text-center">
+                    <hr  style="color: white" class="mt-3">
                     <div class="card-body">
                         <div class="row" >
                             <?php $i = 1; ?>
                             @foreach ($table_group_1 as $item1)
                                 @if ($item1->table_group_1_active == 'TRUE')
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                    <div class="col-6 col-md-2 col-xl-2 mt-3" >
                                         <button type="button" class="btn btn-outline-danger"
                                             href="javascript:void(0)"
                                             onclick="cus_canceltable({{ $item1->table_group_1_id }})"
@@ -238,7 +73,7 @@
                                         </button>
                                     </div>
                                 @else
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item1->table_group_1_id }}">
+                                    <div class="col-6 col-md-2 col-xl-2 mt-3" id="sid{{ $item1->table_group_1_id }}">
                                         <button type="button" class="btn btn-outline-info" href="javascript:void(0)"
                                             onclick="cus_updatetable({{ $item1->table_group_1_id }})"
                                             value="{{ $item1->table_group_1_id }}" style="height: 90px;">
@@ -255,13 +90,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+
+                {{-- <hr  style="color: white" class="mt-3"> --}}
+
+                <div class="col-md-6 text-center">
+                    <hr  style="color: white" class="mt-3">
                     <div class="card-body">
                         <div class="row" >
                             <?php $i = 1; ?>
                             @foreach ($table_group_1B as $item2)
                                 @if ($item2->table_group_1_active == 'TRUE')
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                    <div class="col-6 col-md-2 col-xl-2 mt-3" >
                                         <button type="button" class="btn btn-outline-danger"
                                             href="javascript:void(0)"
                                             onclick="cus_canceltable({{ $item2->table_group_1_id }})"
@@ -274,7 +113,7 @@
                                         </button>
                                     </div>
                                 @else
-                                    <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item2->table_group_1_id }}">
+                                    <div class="col-6 col-md-2 col-xl-2 mt-3" id="sid{{ $item2->table_group_1_id }}">
                                         <button type="button" class="btn btn-outline-info" href="javascript:void(0)"
                                             onclick="cus_updatetable({{ $item2->table_group_1_id }})"
                                             value="{{ $item2->table_group_1_id }}" style="height: 90px;">
@@ -298,8 +137,8 @@
                   
                     <span class="mb-3 mb-md-0 text-muted">
                         <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a> 
-                        <a href="{{ url('order') }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a>
-                        <a href="{{ url('order_table') }}"><i class="fa-solid fa-2x fa-bowl-food me-4 ms-4"></i></a>
+                        {{-- <a href="{{ url('order') }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a> --}}
+                        {{-- <a href="{{ url('order_table') }}"><i class="fa-solid fa-2x fa-bowl-food me-4 ms-4"></i></a> --}}
                         2022 &copy; PR-Restaurant
                     </span>                        
                 </div>
