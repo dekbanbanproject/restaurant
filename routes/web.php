@@ -81,6 +81,9 @@ Route::middleware(['type'])->group(function () {
     Route::get('order_back', [App\Http\Controllers\OrderController::class, 'order_back'])->name('or.order_back'); 
     Route::match(['get', 'post'], 'order_back_update/{id}', [App\Http\Controllers\OrderController::class, 'order_back_update'])->name('or.order_back_update');
     Route::match(['get', 'post'], 'order_back_lastupdate/{id}', [App\Http\Controllers\OrderController::class, 'order_back_lastupdate'])->name('or.order_back_lastupdate');
+    
+    
+    Route::match(['get', 'post'], 'table_qrcode/{id}', [App\Http\Controllers\HomeController::class, 'table_qrcode'])->name('or.table_qrcode');
 
     Route::get('kitchen', [App\Http\Controllers\HomeController::class, 'kitchen'])->name('menu.kitchen');
     Route::match(['get', 'post'], 'kitchen_save', [App\Http\Controllers\HomeController::class, 'kitchen_save'])->name('menu.kitchen_save');

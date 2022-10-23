@@ -1,5 +1,5 @@
 @extends('layouts.admin_tem')
-@section('title', 'PK-BACKOFFice || คลังวัสดุ')
+@section('title', 'PR-Restaurant || จัดการโต๊ะ')
 @section('content')
 <script>
     function TypeAdmin() {
@@ -87,9 +87,12 @@ $pos = strrpos($url, '/') + 1;
                                             {!! QrCode::size(100)->generate(asset('order_add/'.$item->table_group_1_name)); !!} 
                                         </td> 
                                         <td style="color: white">{{ $item->table_group_1_name }}</td> 
-                                        <td style="color: white" width="30%">                                             
+                                        <td style="color: white" width="40%">                                             
                                             {{-- <button type="button" class="btn btn-outline-warning edit_data" data-bs-toggle="modal" data-bs-target="#updteModal{{$item->table_group_1_id}}">  --}}
-                                                <button type="button" class="btn btn-outline-warning " data-bs-toggle="modal" data-bs-target="#updteModal{{$item->table_group_1_id}}"> 
+                                            <a href="{{url('table_qrcode/'.$item->table_group_1_id)}}" class="btn btn-outline-primary"> 
+                                                <i class="fa-solid fa-print"  style="color: rgb(5, 165, 245)"></i> 
+                                            </a>
+                                            <button type="button" class="btn btn-outline-warning " data-bs-toggle="modal" data-bs-target="#updteModal{{$item->table_group_1_id}}"> 
                                                 <i class="fa-solid fa-pen-to-square "  style="color: rgb(248, 120, 16)"></i> 
                                             </button>
                                             <button type="button" class="btn btn-outline-danger btn-sm" href="javascript:void(0)" onclick="delettable({{ $item->table_group_1_id }})" >

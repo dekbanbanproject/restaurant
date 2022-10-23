@@ -272,9 +272,11 @@ class OrderController extends Controller
    
     public function order_back(Request $request)
     {
+        $datenow = date('Y-m-d');
         $data['users'] = User::orderBy('id','asc')->get();
         $data['table_group_1'] = Table_group_1::orderBy('table_group_1_id','asc')->get();
         $data['order_rep'] = Order_rep::leftjoin('menukitchen','menukitchen.menukitchen_id','=','order_rep.order_rep_menukitchen_id')
+       ->where('order_rep_date','=',$datenow)
         ->orderBy('order_rep_id','DESC')
         // ->where('table_group_1_name', '=', $table)       
         ->get();
@@ -282,11 +284,13 @@ class OrderController extends Controller
         $countdata = Order_rep::where('order_rep_active', '!=', 'OFF')
         ->where('order_rep_active', '!=', 'CANCEL') 
         ->where('order_rep_active', '!=', 'PREORDER')
+        ->where('order_rep_date','=',$datenow)
         ->count();
 
         $totaldata = Order_rep::where('order_rep_active', '!=', 'OFF')
         ->where('order_rep_active', '!=', 'CANCEL') 
         ->where('order_rep_active', '!=', 'PREORDER')
+        ->where('order_rep_date','=',$datenow)
         ->sum('order_rep_total');
         return view('store_kitchen.order_back',$data,[
             'countdata'    =>    $countdata,
