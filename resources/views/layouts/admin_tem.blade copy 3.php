@@ -50,7 +50,87 @@
 </style>
 
 <body>
-      
+    {{-- <nav class="navbar navbar-expand-md navbar-light me-5">
+        <div class="container-fuid">
+            <div class="btn-group dropend">
+                <button type="button" class="btn btn-outline-info dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    ADD TABLE
+                </button>
+                <ul class="dropdown-menu">
+                    <li><button type="button" class="dropdown-item" data-bs-toggle="modal"
+                            data-bs-target="#saveModal1">เพิ่มโต๊ะ</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">แก้ไข/ลบ</a></li>
+                </ul>
+            </div>
+            <br>
+            <a class="navbar-brand" href="{{ url('admin/home') }}">
+                <label for="" style="color: white;font-size:25px;"
+                    class="ms-2 mt-2 text-center">PR-Restaurant</label>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               
+                <ul class="navbar-nav me-auto">
+
+                </ul>
+               
+                <ul class="navbar-nav ms-auto">
+                   
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                @if (Auth::user()->img == null)
+                                    <img src="{{ asset('assets/images/default-image.jpg') }}" height="32px" width="32px"
+                                        alt=" " class="rounded-circle header-profile-user me-3">
+                                @else
+                                    <img src="{{ asset('storage/person/' . Auth::user()->img) }}" height="32px"
+                                        width="32px" alt=" " class="rounded-circle header-profile-user me-3">
+                                @endif
+                                <label for="" style="color: white">{{ Auth::user()->fname }}
+                                    {{ Auth::user()->lname }}</label>
+
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+        </div>
+    </nav> --}}
+  
         <nav class="navbar navbar-expand-lg bg-dark">
             <div class="container">
             <a class="navbar-brand" href="#" style="color: rgb(241, 94, 8)">PR-Restaurant</a>
@@ -71,7 +151,36 @@
                     <li class="nav-item ms-3"> 
                         <a href="{{url('order_back')}}" class="btn btn-outline-primary btn-sm">จัดการรายการสั่งซื้อ</a>
                     </li>
-               
+                {{-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(241, 94, 8)">
+                    จัดการโต๊ะนั่ง
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#saveModal1" style="color: rgb(241, 94, 8)">เพิ่มโต๊ะ</a></li> 
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{{url('reserve_table_edit')}}" style="color: rgb(241, 94, 8)">แก้ไข/ลบ</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(241, 94, 8)">
+                        จัดการรายชื่อลูกค้า
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#saveModal2" style="color: rgb(241, 94, 8)">เพิ่มลูกค้า</a></li> 
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{{url('reserve_table_edit')}}" style="color: rgb(241, 94, 8)">แก้ไข/ลบ</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: rgb(241, 94, 8)">
+                        จัดการเมนูอาหาร
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#saveModal3" style="color: rgb(241, 94, 8)">เพิ่มเมนูอาหาร</a></li> 
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{{url('reserve_table_edit')}}" style="color: rgb(241, 94, 8)">แก้ไข/ลบ</a></li>
+                    </ul>
+                </li> --}}
                 
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -127,7 +236,22 @@
             @yield('content')
         </main>
 
-        
+        {{-- <footer class="footer mt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="" style="color: white">2022 © PR-Restaurant</label>
+                    </div>
+               
+                    <div class="col">
+                      
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <label for="" style="color: white"> By Dekbanbanproject</label>
+                    </div>
+                </div>
+            </div>
+        </footer> --}}
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top mb-3 me-3 ms-3">
             <div class="col-md-6 d-flex align-items-center">
               

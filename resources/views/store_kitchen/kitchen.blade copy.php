@@ -1,12 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
 
-@extends('layouts.admin_tem')
-@section('title', 'PR-Restaurant || จัดการเมนูอาหาร')
-@section('content')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title')</title>
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('apkclaim/images/logo150.ico') }}">
+    <link href="{{ asset('apkclaim/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('apkclaim/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('apkclaim/libs/spectrum-colorpicker2/spectrum.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('apkclaim/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('assets/fontawesome/css/all.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/menudis.css') }}" rel="stylesheet">
+    <link href="{{ asset('sky16/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('sky16/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('sky16/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
+
+    <!-- DataTables -->
+    <link href="{{ asset('apkclaim/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('apkclaim/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('apkclaim/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('apkclaim/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('sky16/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+</head>
 <script>
     function TypeAdmin() {
-        window.location.href = "{{ route('index')}}";
+        window.location.href = '{{ route('index') }}';
     }
-    
+
     function kitchen_destroy(menukitchen_id) {
         Swal.fire({
             title: 'ต้องการลบรายการนี้ใช่ไหม?',
@@ -82,19 +118,28 @@
     }
 </script>
 <?php
-    if (Auth::check()) {
-        $type = Auth::user()->type;
-        $iduser = Auth::user()->id;
-    } else {
-        echo "<body onload=\"TypeAdmin()\"></body>";
-        exit();
-    }
-    $url = Request::url();
-    $pos = strrpos($url, '/') + 1;
-?>
+if (Auth::check()) {
+    $type = Auth::user()->type;
+    $iduser = Auth::user()->id;
+} else {
+    echo "<body onload=\"TypeAdmin()\"></body>";
+    exit();
+}
+$url = Request::url();
+$pos = strrpos($url, '/') + 1;
 
- 
-    {{-- <nav class="navbar navbar-expand-md navbar-light me-5">
+?>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Edu VIC WA NT Beginner', cursive;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light me-5">
         <div class="container-fuid">
 
             <div class="btn-group dropend">
@@ -168,26 +213,19 @@
                 </ul>
             </div>
         </div>
-    </nav> --}}
- 
-        <div class="container">
-            {{-- <h3 align="center" style="color: white" class="mt-4">เมนูอาหาร</h3>
-            <br /> --}}
+    </nav>
+    <div class="menu4">
+        <div class="container-fluid ">
+            <h3 align="center" style="color: white">เมนูอาหาร</h3>
+            <br />
             <div class="panel panel-default">
-                <div class="panel-heading ">
-                    <div class="row">
-                        <div class="col-md-2 mt-4 mb-3">
-                            <h5 style="color: white" >เมนูอาหาร</h5>
-                        </div>
-                        <div class="col"></div>
-                        <div class="col-md-2 mt-4 mb-3">
-                            <a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#saveModalmenu" style="color: rgb(241, 94, 8)">เพิ่มเมนูอาหาร</a>
-                        </div>
-                    </div>                       
+                <div class="panel-heading">
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        @csrf 
+                        @csrf
+                        {{-- <table class="table table-hover"> --}}
+                        {{-- <table class="table table-hover" id="editable"  > --}}
                         <table class="table table-hover" id="example">
                             <thead>
                                 <tr>
@@ -197,7 +235,7 @@
                                     <th style="color: white">เมนู</th>
                                     <th style="color: white">ราคาต้นทุน</th>
                                     <th style="color: white">ราคาขาย</th>
-                                    <th style="color: white" width="20%">จัดการ</th>
+                                    <th style="color: white" width="30%">จัดการ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -223,13 +261,13 @@
                                         <td style="color: white">{{ $item->menukitchen_name }}</td>
                                         <td style="color: white">{{ $item->menukitchen_pricecost }}</td>
                                         <td style="color: white">{{ $item->menukitchen_pricesale }}</td>
-                                        <td style="color: white" width="20%">
+                                        <td style="color: white" width="30%">
                                             {{-- <button type="button" class="btn btn-outline-warning edit_data" value="{{ $item->menukitchen_id }}"> --}}
                                                 <button type="button" class="btn btn-outline-warning" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#updteModal{{ $item->menukitchen_id }}">
                                                 <i class="fa-solid fa-pen-to-square "
                                                     style="color: rgb(248, 120, 16)"></i>
                                             </button>
-                                            <button type="button" class="btn btn-outline-danger "
+                                            <button type="button" class="btn btn-outline-danger btn-sm"
                                                 href="javascript:void(0)"
                                                 onclick="kitchen_destroy({{ $item->menukitchen_id }})">
                                                 <i class="fa-solid fa-trash-can text-danger"></i>
@@ -327,12 +365,12 @@
         </div>
     </div>
 
-    <!-- Modal saveModalmenu-->
-    <div class="modal fade" id="saveModalmenu" tabindex="-1" aria-labelledby="saveModalmenuLabel" aria-hidden="true">
+    <!-- Modal saveModal1-->
+    <div class="modal fade" id="saveModal1" tabindex="-1" aria-labelledby="saveModal1Label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="saveModalmenuLabel">เพิ่มเมนูอาหาร</h1>
+                    <h1 class="modal-title fs-5" id="saveModal1Label">เพิ่มเมนูอาหาร</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -397,13 +435,116 @@
             </form>
         </div>
     </div>
-    @endsection
-    @section('footer') 
-  
+
+    <!-- Modal updteModal-->
+    {{-- <div class="modal fade" id="updteModal" tabindex="-1" aria-labelledby="updteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="updteModalLabel">แก้ไขลูกค้า</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="custom-validation" action="{{ route('menu.kitchen_update') }}" method="POST"
+                id="menu_update" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <img src="{{ asset('assets/images/default-image.jpg') }}" id="add_upload_preview"
+                                alt="Image" class="img-thumbnail" width="300px" height="300px">
+                            <br>
+                            <input type="file" class="form-control" id="img" name="img"
+                                onchange="addpic(this)">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <label for="menukitchen_code" class="form-label">barcode เมนู</label>
+                                    <input type="text" class="form-control" id="editmenukitchen_code"
+                                        name="menukitchen_code">
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="menukitchen_name" class="form-label">ชื่อเมนู</label>
+                                    <input type="text" class="form-control" id="editmenukitchen_name"
+                                        name="menukitchen_name">
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="menukitchen_pricecost" class="form-label">ราคาทุน</label>
+                                    <input type="text" class="form-control" id="editmenukitchen_pricecost"
+                                        name="menukitchen_pricecost">
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <label for="menukitchen_pricesale" class="form-label">ราคาขาย</label>
+                                    <input type="text" class="form-control" id="editmenukitchen_pricesale"
+                                        name="menukitchen_pricesale">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" class="form-control" id="editmenukitchen_id" name="menukitchen_id">
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+                        Update
+                    </button>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i
+                            class="fa-solid fa-xmark me-2"></i>Close</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div> --}}
+
+    <footer class="footer ms-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label for="" style="color: white">2022 © PR-Restaurant</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <label for="" style="color: white"> By Dekbanbanproject</label>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{{ asset('apkclaim/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/select2/js/select2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script> --}}
+    <!-- Required datatable js -->
+    <script src="{{ asset('apkclaim/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Buttons examples -->
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+
+    <script src="{{ asset('apkclaim/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+
+    <!-- Responsive examples -->
+    <script src="{{ asset('apkclaim/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#example').DataTable();
-            $('#example2').DataTable();    
+            $('#example2').DataTable();
+
+            
+
         });
         $(document).ready(function() {
             $.ajaxSetup({
@@ -411,7 +552,26 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-           
+            // $(document).on('click', '.edit_data', function() {
+            //     var menukitchen_id = $(this).val();
+          
+            //     $('#updteModal').modal('show');
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "{{ url('kitchen_edit') }}" + '/' + menukitchen_id,
+            //         success: function(res) {
+            //             $('#editmenukitchen_code').val(res.datakitchen.menukitchen_code)
+            //             $('#editmenukitchen_name').val(res.datakitchen.menukitchen_name)
+            //             $('#editmenukitchen_pricecost').val(res.datakitchen
+            //                 .menukitchen_pricecost)
+            //             $('#editmenukitchen_pricesale').val(res.datakitchen
+            //                 .menukitchen_pricesale)
+            //             $('#editmenukitchen_id').val(res.datakitchen.menukitchen_id)
+            //         },
+            //     });
+            // });
+
+            
 
             $('#menu_insert').on('submit', function(e) {
                 e.preventDefault();
@@ -488,8 +648,57 @@
                     }
                 });
             });
-           
+            // $('#updateBtn').click(function() {
+            //     var fname = $('#editfname').val();
+            //     var lname = $('#editlname').val();
+            //     var tel = $('#edittel').val();
+            //     var username = $('#editusername').val();
+            //     var id = $('#editid').val();
+            //     //    alert(fname); 
+            //     $.ajax({
+            //         url: "{{ route('cus.customer_update') }}",
+            //         type: "POST",
+            //         dataType: 'json',
+            //         data: {
+            //             fname,
+            //             lname,
+            //             tel,
+            //             username,
+            //             id
+            //         },
+            //         success: function(data) {
+            //             if (data.status == 200) {
+            //                 // alert('gggggg');
+            //                 Swal.fire({
+            //                     title: 'แก้ไขข้อมูลสำเร็จ',
+            //                     text: "You edit data success",
+            //                     icon: 'success',
+            //                     showCancelButton: false,
+            //                     confirmButtonColor: '#06D177',
+            //                     confirmButtonText: 'เรียบร้อย'
+            //                 }).then((result) => {
+            //                     if (result
+            //                         .isConfirmed) {
+            //                         console.log(
+            //                             data);
+
+            //                         window.location
+            //                             .reload();
+            //                     }
+            //                 })
+            //             } else {
+
+            //             }
+
+            //         },
+            //     });
+            // });
+
+
+
         });
     </script>
- 
-    @endsection
+    <script></script>
+</body>
+
+</html>

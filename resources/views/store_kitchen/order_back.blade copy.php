@@ -1,11 +1,47 @@
-@extends('layouts.admin_tem')
-@section('title', 'PR-Restaurant || จัดการรายการสั่งซื้อ')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>PR - Restaurant </title>
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('apkclaim/images/logo150.ico') }}">
+    <link href="{{ asset('apkclaim/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('apkclaim/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('apkclaim/libs/spectrum-colorpicker2/spectrum.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('apkclaim/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('assets/fontawesome/css/all.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/menudis.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/menufooddis.css') }}" rel="stylesheet">
+    <link href="{{ asset('sky16/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('sky16/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('sky16/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
+
+    <!-- DataTables -->
+    <link href="{{ asset('apkclaim/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css" />
+    <link href="{{ asset('apkclaim/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+    <link href="{{ asset('apkclaim/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css') }}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('apkclaim/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
+        rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('sky16/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+</head>
 <script>
-    function TypeAdmin() {
-        window.location.href = "{{ route('index')}}";
-    }
     
+
     function order_destroy(order_rep_id) {
         Swal.fire({
             title: 'ต้องการลบรายการนี้ใช่ไหม?',
@@ -126,19 +162,11 @@
             }
         })
     }
+ 
 </script>
-<?php
-    if (Auth::check()) {
-        $type = Auth::user()->type;
-        $iduser = Auth::user()->id;
-    } else {
-        echo "<body onload=\"TypeAdmin()\"></body>";
-        exit();
-    }
-    $url = Request::url();
-    $pos = strrpos($url, '/') + 1;
-?>
 
+
+<body> 
         <div class="container">
 
             <div class="row"> 
@@ -323,11 +351,51 @@
                 </div>
             </div>
 
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top mb-3">
+                <div class="col-md-6 d-flex align-items-center">
+                  
+                    <span class="mb-3 mb-md-0 text-muted">
+                        {{-- <a href="{{ route('login') }}"><i class="fa-solid fa-2x fa-fingerprint me-4 ms-4"></i></a>  --}}
+                        {{-- <a href="{{ url('order/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a> --}}
+                        {{-- <a href="{{ url('order_add/'.$table) }}"><i class="fa-solid fa-2x fa-utensils me-4 ms-4"></i></a> --}}
+                        2022 &copy; PR-Restaurant
+                    </span>                        
+                </div>
             
+                <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-instagram"></i></a></li>
+                    {{-- <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-twitter"></i></a></li> --}}
+                    <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-2x fa-facebook"></i></a></li>
+                </ul>
+                <br>
+        </footer>
         </div>
    
-    @endsection
-    @section('footer') 
+    <script src="{{ asset('apkclaim/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/select2/js/select2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script> --}}
+    <!-- Required datatable js -->
+    <script src="{{ asset('apkclaim/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Buttons examples -->
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/pdfmake/build/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/pdfmake/build/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+
+    <script src="{{ asset('apkclaim/libs/datatables.net-keytable/js/dataTables.keyTable.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+
+    <!-- Responsive examples -->
+    <script src="{{ asset('apkclaim/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('apkclaim/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
     <script>
         $(document).ready(function() {
              window.setTimeout( function() {
@@ -347,4 +415,7 @@
         
         });
     </script>
-  @endsection
+    <script></script>
+</body>
+
+</html>

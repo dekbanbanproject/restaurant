@@ -151,9 +151,9 @@ $pos = strrpos($url, '/') + 1;
 <body  >
   <nav class="navbar navbar-expand-md navbar-light me-5">
     <div class="container-fuid">
-        <a href="{{url("setting/setting_index")}}" target="_blank">  
+        {{-- <a href="{{url("setting/setting_index")}}" target="_blank">  
           <i class="fa-solid fa-3x fa-gear text-danger" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="ตั้งค่า"></i>
-        </a>
+        </a> --}}
       <br>
         <a class="navbar-brand" href="{{ url('admin/home') }}">
             {{-- {{ config('app.name', 'Laravel') }} --}}

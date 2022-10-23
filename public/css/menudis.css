@@ -1,17 +1,14 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
   body { 
     width: 100%;
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-        url(/restaurant/public/assets/images/restaurant_2.jpg)no-repeat 50%;
-        /* url(/assets/images/restaurant_2.jpg)no-repeat 50%; */
-        /* url(/sky16/images/bgPK.jpg)no-repeat 50%; */
-        /* url(/sky16/images/logo.png)no-repeat 50%; */
+        url(/restaurant/public/assets/images/restaurant_2.jpg)no-repeat 50%; 
     background-size: cover;
     background-attachment: fixed;
     display: flex;
@@ -24,7 +21,6 @@
     position: relative;
     width:650px;
     height: 650px;
-    /* background: #80D0C7; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,8 +30,6 @@
     width:1000px;
     height: 1000px;
 margin-top: 300px;
-
-    /* background: #80D0C7; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,20 +38,15 @@ margin-top: 300px;
     position: relative;
     width:1000px;
     height: 2000px;
-    margin-top:100px;
-/* margin-bottom: 300px; */
-    /* background: #80D0C7; */
+    margin-top:100px; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .menu4 {
     position: relative;
-    width:1000px;
-    /* height: 2000px; */
-    margin-top:450px;
-/* margin-bottom: 300px; */
-    /* background: #80D0C7; */
+    width:1000px; 
+    margin-top:450px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,9 +55,7 @@ margin-top: 300px;
     position: relative;
     width:1000px;
     height: 2000px;
-    margin-top:350px;
-/* margin-bottom: 300px; */
-    /* background: #80D0C7; */
+    margin-top:350px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,8 +63,7 @@ margin-top: 300px;
 .menu li {
     position: absolute;
     left: 0;
-    list-style: none;
-    /* ความกว้างวงกลม */
+    list-style: none; 
     transform-origin: 320px;
     transition: 0.5s;
     transition-delay: calc(0.1s * var(--i));
@@ -126,11 +112,11 @@ margin-top: 300px;
 }
  
 
-.container {
+/* .container {
     position: relative;
-}
+} */
 
-.form {
+/* .form {
     position: relative;
     z-index: 100;
     width: 500px;
@@ -142,7 +128,7 @@ margin-top: 300px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
+} */
 .logo{
     /* width: 200px; */
     width: 100vh;
@@ -259,7 +245,7 @@ margin-top: 300px;
     z-index: -1;
     animation: float 2s 0.7s ease-in-out infinite;
 }
-@keyframes float{
+/* @keyframes float{
     0%{
         transform: translateY(0);
     }
@@ -269,4 +255,4 @@ margin-top: 300px;
     100%{
         transform: translateY(0);
     }
-}
+} */
