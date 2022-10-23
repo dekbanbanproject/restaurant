@@ -65,7 +65,7 @@ class HomeController extends Controller
     public function table_qrcode(Request $request,$id)
     {
         $data['users'] = User::get();
-        $data['table_group_1'] = Table_group_1::where('table_group_1_zone','=','A')->where('table_group_1_id','=',$id)->first();
+        $data['table_group_1'] = Table_group_1::where('table_group_1_id','=',$id)->first();
         $data['table_group_1B'] = Table_group_1::where('table_group_1_zone','=','B')->orderBy('table_group_1_id','asc')->get();
 
         return view('table_qrcode',$data);

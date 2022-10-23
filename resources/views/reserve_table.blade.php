@@ -99,13 +99,13 @@
  
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mt-4">
                 <div class="card-body">
                     <div class="row" >
                         <?php $i = 1; ?>
                         @foreach ($table_group_1 as $item1)
                             @if ($item1->table_group_1_active == 'TRUE')
-                                <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                <div class="col-6 col-md-2 col-xl-2 me-2 mt-2" >
                                     <button type="button" class="btn btn-outline-danger"
                                         href="javascript:void(0)"
                                         onclick="canceltable({{ $item1->table_group_1_id }})"
@@ -118,7 +118,7 @@
                                     </button>
                                 </div>
                             @else
-                                <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item1->table_group_1_id }}">
+                                <div class="col-6 col-md-2 col-xl-2 me-2 mt-2" id="sid{{ $item1->table_group_1_id }}">
                                     <button type="button" class="btn btn-outline-info" href="javascript:void(0)"
                                         onclick="updatetable({{ $item1->table_group_1_id }})"
                                         value="{{ $item1->table_group_1_id }}" style="height: 90px;">
@@ -135,13 +135,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-4">
                 <div class="card-body">
                     <div class="row" >
                         <?php $i = 1; ?>
                         @foreach ($table_group_1B as $item2)
                             @if ($item2->table_group_1_active == 'TRUE')
-                                <div class="col-6 col-md-2 col-xl-2 me-2" >
+                                <div class="col-6 col-md-2 col-xl-2 me-2 mt-2" >
                                     <button type="button" class="btn btn-outline-danger"
                                         href="javascript:void(0)"
                                         onclick="canceltable({{ $item2->table_group_1_id }})"
@@ -154,7 +154,7 @@
                                     </button>
                                 </div>
                             @else
-                                <div class="col-6 col-md-2 col-xl-2 me-2" id="sid{{ $item2->table_group_1_id }}">
+                                <div class="col-6 col-md-2 col-xl-2 me-2 mt-2" id="sid{{ $item2->table_group_1_id }}">
                                     <button type="button" class="btn btn-outline-success" href="javascript:void(0)"
                                         onclick="updatetable({{ $item2->table_group_1_id }})"
                                         value="{{ $item2->table_group_1_id }}" style="height: 90px;">

@@ -78,6 +78,9 @@ Route::get('manage/home', [App\Http\Controllers\HomeController::class, 'manageHo
 
 Route::middleware(['type'])->group(function () {
 
+    Route::get('cashier', [App\Http\Controllers\CashierController::class, 'cashier'])->name('cr.cashier'); 
+    Route::match(['get', 'post'], 'cashier_pay/{id}', [App\Http\Controllers\CashierController::class, 'cashier_pay'])->name('cr.cashier_pay');
+
     Route::get('order_back', [App\Http\Controllers\OrderController::class, 'order_back'])->name('or.order_back'); 
     Route::match(['get', 'post'], 'order_back_update/{id}', [App\Http\Controllers\OrderController::class, 'order_back_update'])->name('or.order_back_update');
     Route::match(['get', 'post'], 'order_back_lastupdate/{id}', [App\Http\Controllers\OrderController::class, 'order_back_lastupdate'])->name('or.order_back_lastupdate');

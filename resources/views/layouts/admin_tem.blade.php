@@ -37,7 +37,8 @@
 <style>
      body { 
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    /* height: 100vh; */
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
         url(/restaurant/public/assets/images/restaurant_2.jpg)no-repeat 50%; 
     background-size: cover;
@@ -60,6 +61,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"> 
+                        <a href="{{url('reserve_table')}}" class="btn btn-outline-danger btn-sm">จองโต๊ะ</a>
+                    </li>
+                    <li class="nav-item ms-3"> 
                         <a href="{{url('reserve_table_edit')}}" class="btn btn-outline-warning btn-sm">จัดการโต๊ะนั่ง</a>
                     </li>
                     <li class="nav-item ms-3"> 
@@ -71,7 +75,9 @@
                     <li class="nav-item ms-3"> 
                         <a href="{{url('order_back')}}" class="btn btn-outline-primary btn-sm">จัดการรายการสั่งซื้อ</a>
                     </li>
-               
+                    <li class="nav-item ms-3"> 
+                        <a href="{{url('cashier')}}" class="btn btn-outline-primary btn-sm">Cashier</a>
+                    </li>
                 
                 </ul>
                 <ul class="navbar-nav ms-auto">
